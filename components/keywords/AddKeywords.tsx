@@ -29,7 +29,9 @@ const AddKeywords = ({ closeModal, domain, keywords, scraperName = '', allowsCit
 
    const [error, setError] = useState<string>('');
    const [showTagSuggestions, setShowTagSuggestions] = useState(false);
-   const [newKeywordsData, setNewKeywordsData] = useState<KeywordsInput>({ keywords: '', device: 'desktop', country: defCountry, domain, tags: '', engine: 'google' });
+   const [newKeywordsData, setNewKeywordsData] = useState<KeywordsInput>({
+      keywords: '', device: 'desktop', country: defCountry, domain, tags: '', engine: 'google',
+   });
    const { mutate: addMutate, isLoading: isAdding } = useAddKeywords(() => closeModal(false));
 
    const existingTags: string[] = useMemo(() => {
@@ -53,10 +55,16 @@ const AddKeywords = ({ closeModal, domain, keywords, scraperName = '', allowsCit
          const devices = nkwrds.device.split(',');
          const multiDevice = nkwrds.device.includes(',') && devices.length > 1;
          const keywordsArray = [...new Set(nkwrds.keywords.split('\n').map((item) => item.trim()).filter((item) => !!item))];
-         const currentKeywords = keywords.map((k) => `${k.keyword}-${k.device}-${k.country}${k.city ? `-${k.city}` : ''}-${k.engine || 'google'}`);
+         const eng = nkwrds.engine || 'google';
+         const currentKeywords = keywords.map((k) => {
+            return `${k.keyword}-${k.device}-${k.country}${k.city ? `-${k.city}` : ''}-${k.engine || 'google'}`;
+         });
 
          const keywordExist = keywordsArray.filter((k) =>
-            devices.some((device) => currentKeywords.includes(`${k}-${device}-${nkwrds.country}${nkwrds.city ? `-${nkwrds.city}` : ''}-${nkwrds.engine || 'google'}`)),
+            devices.some((device) => {
+               const key = `${k}-${device}-${nkwrds.country}${nkwrds.city ? `-${nkwrds.city}` : ''}-${eng}`;
+               return currentKeywords.includes(key);
+            }),
          );
 
          if (!multiDevice && (keywordsArray.length === 1 || currentKeywords.length === keywordExist.length) && keywordExist.length > 0) {
@@ -64,9 +72,10 @@ const AddKeywords = ({ closeModal, domain, keywords, scraperName = '', allowsCit
             setTimeout(() => { setError(''); }, 3000);
          } else {
             const newKeywords = keywordsArray.flatMap((k) =>
-               devices.filter((device) =>
-                 !currentKeywords.includes(`${k}-${device}-${nkwrds.country}${nkwrds.city ? `-${nkwrds.city}` : ''}-${nkwrds.engine || 'google'}`),
-               ).map((device) => ({
+               devices.filter((device) => {
+                 const key = `${k}-${device}-${nkwrds.country}${nkwrds.city ? `-${nkwrds.city}` : ''}-${eng}`;
+                 return !currentKeywords.includes(key);
+               }).map((device) => ({
                  keyword: k,
                  device,
                  country: nkwrds.country,
