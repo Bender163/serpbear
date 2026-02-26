@@ -250,4 +250,6 @@ interface ScraperSettings {
    scrapeURL?(keyword:KeywordType, settings:SettingsType, countries:countryData): string,
    /** Custom function to extract the serp result from the scraped data. The extracted data should be @return {scraperExtractedItem[]} */
    serpExtractor?(content:string): scraperExtractedItem[],
+   /** Response type for the scraper API. Default is 'json'. Use 'text' for XML or HTML responses (e.g., XMLRiver). */
+   responseType?: 'json' | 'text',
 }

@@ -110,9 +110,18 @@ export const scrapeKeywordFromGoogle = async (keyword:KeywordType, settings:Sett
 
    let scraperError:any = null;
    try {
-      const res = scraperType === 'proxy' && settings.proxy ? await scraperClient : await scraperClient.then((reslt:any) => reslt.json());
+      let res: any;
+      if (scraperType === 'proxy' && settings.proxy) {
+         res = await scraperClient;
+      } else if (scraperObj?.responseType === 'text') {
+         // For XML-based scrapers (e.g., XMLRiver) — parse as text, not JSON
+         const textResponse = await scraperClient.then((reslt:any) => reslt.text());
+         res = { _rawText: textResponse };
+      } else {
+         res = await scraperClient.then((reslt:any) => reslt.json());
+      }
       const scraperResult = scraperObj?.resultObjectKey && res[scraperObj.resultObjectKey] ? res[scraperObj.resultObjectKey] : '';
-      const scrapeResult:string = (res.data || res.html || res.results || scraperResult || '');
+      const scrapeResult:string = (res._rawText || res.data || res.html || res.results || scraperResult || '');
       if (res && scrapeResult) {
          const extracted = scraperObj?.serpExtractor ? scraperObj.serpExtractor(scrapeResult) : extractScrapedResult(scrapeResult, keyword.device);
          // await writeFile('result.txt', JSON.stringify(scrapeResult), { encoding: 'utf-8' }).catch((err) => { console.log(err); });
