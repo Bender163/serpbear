@@ -107,8 +107,10 @@ export const filterKeywords = (keywords: KeywordType[], filterParams: KeywordFil
        const searchMatch = !filterParams.search ? true : filterParams.search
        && keywrd.keyword.toLowerCase().includes(filterParams.search.toLowerCase());
        const tagsMatch = filterParams.tags.length === 0 ? true : filterParams.tags && keywrd.tags.find((x) => filterParams.tags.includes(x));
+       const engineMatch = !filterParams.engines || filterParams.engines.length === 0
+          ? true : filterParams.engines.includes(keywrd.engine || 'google');
 
-       if (countryMatch && searchMatch && tagsMatch) {
+       if (countryMatch && searchMatch && tagsMatch && engineMatch) {
           filteredItems.push(keywrd);
        }
    });

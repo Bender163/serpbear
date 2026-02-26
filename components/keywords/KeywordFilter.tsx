@@ -57,6 +57,19 @@ const KeywordFilters = (props: KeywordFilterProps) => {
 
    const filterTags = (tags:string[]) => filterKeywords({ ...filterParams, tags });
 
+   const filterEngines = (engines:string[]) => filterKeywords({ ...filterParams, engines });
+
+   const engineOptions: SelectionOption[] = useMemo(() => {
+      const engines = new Set<string>();
+      (keywords as KeywordType[]).forEach((k) => {
+         engines.add(k.engine || 'google');
+      });
+      const opts: SelectionOption[] = [];
+      if (engines.has('google')) opts.push({ label: 'Google', value: 'google' });
+      if (engines.has('yandex')) opts.push({ label: 'Yandex', value: 'yandex' });
+      return opts;
+   }, [keywords]);
+
    const searchKeywords = (event:React.FormEvent<HTMLInputElement>) => {
       const filtered = filterKeywords({ ...filterParams, search: event.currentTarget.value });
       return filtered;
@@ -163,6 +176,16 @@ const KeywordFilters = (props: KeywordFilterProps) => {
                      flags={true}
                   />
                </div>
+               {!isConsole && engineOptions.length > 1 && (
+                  <div className={'engine_filter mb-2 lg:mb-0'}>
+                     <SelectField
+                        selected={filterParams.engines}
+                        options={engineOptions}
+                        defaultLabel='All Engines'
+                        updateField={(updated:string[]) => filterEngines(updated)}
+                     />
+                  </div>
+               )}
                {!isConsole && (
                   <div className={'tags_filter mb-2 lg:mb-0'}>
                      <SelectField

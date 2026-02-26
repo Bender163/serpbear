@@ -55,6 +55,7 @@ type KeywordLastResult = {
 type KeywordFilters = {
    countries: string[],
    tags: string[],
+   engines: string[],
    search: string,
 }
 

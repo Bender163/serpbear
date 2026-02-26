@@ -36,7 +36,7 @@ const KeywordsTable = (props: KeywordsTableProps) => {
    const [showTagManager, setShowTagManager] = useState<null|number>(null);
    const [showAddTags, setShowAddTags] = useState<boolean>(false);
    const [SCListHeight, setSCListHeight] = useState(500);
-   const [filterParams, setFilterParams] = useState<KeywordFilters>({ countries: [], tags: [], search: '' });
+   const [filterParams, setFilterParams] = useState<KeywordFilters>({ countries: [], tags: [], engines: [], search: '' });
    const [sortBy, setSortBy] = useState<string>('date_asc');
    const [scDataType, setScDataType] = useState<string>('threeDays');
    const [showScDataTypes, setShowScDataTypes] = useState<boolean>(false);
