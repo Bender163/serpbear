@@ -20,6 +20,7 @@ type KeywordsInput = {
    domain: string,
    tags: string,
    city?:string,
+   engine?:string,
 }
 
 const AddKeywords = ({ closeModal, domain, keywords, scraperName = '', allowsCity = false }: AddKeywordsProps) => {
@@ -28,7 +29,7 @@ const AddKeywords = ({ closeModal, domain, keywords, scraperName = '', allowsCit
 
    const [error, setError] = useState<string>('');
    const [showTagSuggestions, setShowTagSuggestions] = useState(false);
-   const [newKeywordsData, setNewKeywordsData] = useState<KeywordsInput>({ keywords: '', device: 'desktop', country: defCountry, domain, tags: '' });
+   const [newKeywordsData, setNewKeywordsData] = useState<KeywordsInput>({ keywords: '', device: 'desktop', country: defCountry, domain, tags: '', engine: 'google' });
    const { mutate: addMutate, isLoading: isAdding } = useAddKeywords(() => closeModal(false));
 
    const existingTags: string[] = useMemo(() => {
@@ -52,10 +53,10 @@ const AddKeywords = ({ closeModal, domain, keywords, scraperName = '', allowsCit
          const devices = nkwrds.device.split(',');
          const multiDevice = nkwrds.device.includes(',') && devices.length > 1;
          const keywordsArray = [...new Set(nkwrds.keywords.split('\n').map((item) => item.trim()).filter((item) => !!item))];
-         const currentKeywords = keywords.map((k) => `${k.keyword}-${k.device}-${k.country}${k.city ? `-${k.city}` : ''}`);
+         const currentKeywords = keywords.map((k) => `${k.keyword}-${k.device}-${k.country}${k.city ? `-${k.city}` : ''}-${k.engine || 'google'}`);
 
          const keywordExist = keywordsArray.filter((k) =>
-            devices.some((device) => currentKeywords.includes(`${k}-${device}-${nkwrds.country}${nkwrds.city ? `-${nkwrds.city}` : ''}`)),
+            devices.some((device) => currentKeywords.includes(`${k}-${device}-${nkwrds.country}${nkwrds.city ? `-${nkwrds.city}` : ''}-${nkwrds.engine || 'google'}`)),
          );
 
          if (!multiDevice && (keywordsArray.length === 1 || currentKeywords.length === keywordExist.length) && keywordExist.length > 0) {
@@ -64,7 +65,7 @@ const AddKeywords = ({ closeModal, domain, keywords, scraperName = '', allowsCit
          } else {
             const newKeywords = keywordsArray.flatMap((k) =>
                devices.filter((device) =>
-                 !currentKeywords.includes(`${k}-${device}-${nkwrds.country}${nkwrds.city ? `-${nkwrds.city}` : ''}`),
+                 !currentKeywords.includes(`${k}-${device}-${nkwrds.country}${nkwrds.city ? `-${nkwrds.city}` : ''}-${nkwrds.engine || 'google'}`),
                ).map((device) => ({
                  keyword: k,
                  device,
@@ -72,6 +73,7 @@ const AddKeywords = ({ closeModal, domain, keywords, scraperName = '', allowsCit
                  domain: nkwrds.domain,
                  tags: nkwrds.tags,
                  city: nkwrds.city,
+                 engine: nkwrds.engine || 'google',
                })),
              );
             addMutate(newKeywords);
@@ -126,6 +128,21 @@ const AddKeywords = ({ closeModal, domain, keywords, scraperName = '', allowsCit
                            <Icon type='mobile' /> <i className='not-italic hidden lg:inline-block'>Mobile</i>
                            <Icon type='check' classes={'pl-1'} size={12} color={newKeywordsData.device.includes('mobile') ? '#4338ca' : '#bbb'} />
                         </li>
+                  </ul>
+               </div>
+               <div className='my-3 flex justify-between text-sm items-center'>
+                  <span className='text-xs font-semibold text-gray-500 mr-3'>Search Engine:</span>
+                  <ul className='flex text-xs font-semibold text-gray-500'>
+                     <li
+                        className={`${deviceTabStyle} mr-2 ${newKeywordsData.engine === 'google' ? '  bg-indigo-50 text-indigo-700' : ''}`}
+                        onClick={() => setNewKeywordsData({ ...newKeywordsData, engine: 'google' })}>
+                           <span className='text-blue-500 font-bold mr-1'>G</span> Google
+                     </li>
+                     <li
+                        className={`${deviceTabStyle} ${newKeywordsData.engine === 'yandex' ? '  bg-indigo-50 text-indigo-700' : ''}`}
+                        onClick={() => setNewKeywordsData({ ...newKeywordsData, engine: 'yandex' })}>
+                           <span className='text-red-500 font-bold mr-1'>Y</span> Yandex
+                     </li>
                   </ul>
                </div>
                <div className='relative'>

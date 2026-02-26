@@ -80,7 +80,7 @@ const xmlriver: ScraperSettings = {
  *     <group id="1"><doc><url>...</url><title>...</title></doc></group>
  *   </grouping></results>
  */
-export function parseXmlRiverResults(xml: string): scraperExtractedItem[] {
+export function parseXmlRiverResults(xml: string, source: string = 'Google'): scraperExtractedItem[] {
    const results: scraperExtractedItem[] = [];
 
    // Check for XMLRiver error
@@ -118,7 +118,7 @@ export function parseXmlRiverResults(xml: string): scraperExtractedItem[] {
       });
    }
 
-   console.log(`[XMLRiver Google] Extracted ${results.length} results`);
+   console.log(`[XMLRiver ${source}] Extracted ${results.length} results`);
    return results;
 }
 

@@ -10,6 +10,7 @@ import serper from './services/serper';
 import hasdata from './services/hasdata';
 import crazyserp from './services/crazyserp';
 import xmlriver from './services/xmlriver';
+import xmlriverYandex from './services/xmlriver-yandex';
 
 export default [
    scrapingRobot,
@@ -24,4 +25,5 @@ export default [
    hasdata,
    crazyserp,
    xmlriver,
+   xmlriverYandex,
 ];

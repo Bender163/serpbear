@@ -70,6 +70,9 @@ class Keyword extends Model {
 
    @Column({ type: DataType.STRING, allowNull: true })
    settings!: string;
+
+   @Column({ type: DataType.STRING, allowNull: true, defaultValue: null })
+   engine!: string | null;
 }
 
 export default Keyword;

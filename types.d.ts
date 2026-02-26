@@ -43,6 +43,7 @@ type KeywordType = {
    scData?: KeywordSCData,
    uid?: string
    city?: string
+   engine?: string | null
 }
 
 type KeywordLastResult = {
@@ -131,7 +132,8 @@ type KeywordAddPayload = {
    country: string,
    domain: string,
    tags?: string,
-   city?:string
+   city?:string,
+   engine?: string | null
 }
 
 type SearchAnalyticsRawItem = {
@@ -252,4 +254,6 @@ interface ScraperSettings {
    serpExtractor?(content:string): scraperExtractedItem[],
    /** Response type for the scraper API. Default is 'json'. Use 'text' for XML or HTML responses (e.g., XMLRiver). */
    responseType?: 'json' | 'text',
+   /** If true, this scraper is only available per-keyword (via engine field), not as global scraper in Settings. */
+   perKeywordOnly?: boolean,
 }

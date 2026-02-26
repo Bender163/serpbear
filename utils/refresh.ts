@@ -1,6 +1,6 @@
 import { performance } from 'perf_hooks';
 import { setTimeout as sleep } from 'timers/promises';
-import { RefreshResult, removeFromRetryQueue, retryScrape, scrapeKeywordFromGoogle } from './scraper';
+import { RefreshResult, removeFromRetryQueue, resolveScraperType, retryScrape, scrapeKeywordFromGoogle } from './scraper';
 import parseKeywords from './parseKeywords';
 import Keyword from '../database/models/keyword';
 
@@ -12,29 +12,50 @@ import Keyword from '../database/models/keyword';
  * @returns {Promise}
  */
 const refreshAndUpdateKeywords = async (rawkeyword:Keyword[], settings:SettingsType): Promise<KeywordType[]> => {
-   const keywords:KeywordType[] = rawkeyword.map((el) => el.get({ plain: true }));
    if (!rawkeyword || rawkeyword.length === 0) { return []; }
    const start = performance.now();
    const updatedKeywords: KeywordType[] = [];
 
-   if (['scrapingant', 'serpapi', 'searchapi'].includes(settings.scraper_type)) {
-      const refreshedResults = await refreshParallel(keywords, settings);
-      if (refreshedResults.length > 0) {
-         for (const keyword of rawkeyword) {
-            const refreshedkeywordData = refreshedResults.find((k) => k && k.ID === keyword.ID);
-            if (refreshedkeywordData) {
-               const updatedkeyword = await updateKeywordPosition(keyword, refreshedkeywordData, settings);
-               updatedKeywords.push(updatedkeyword);
+   // Group keywords by their resolved scraper type (per-keyword engine support)
+   const groups: Map<string, Keyword[]> = new Map();
+   for (const kw of rawkeyword) {
+      const plain = kw.get({ plain: true });
+      const scraperType = resolveScraperType(plain, settings);
+      if (!groups.has(scraperType)) groups.set(scraperType, []);
+      groups.get(scraperType)!.push(kw);
+   }
+
+   // Process each engine group separately
+   for (const [scraperType, groupKeywords] of groups) {
+      const groupPlain = groupKeywords.map((el) => el.get({ plain: true }));
+
+      if (['scrapingant', 'serpapi', 'searchapi'].includes(scraperType)) {
+         // Parallel scraping for API-based scrapers
+         const refreshedResults = await refreshParallel(groupPlain, settings);
+         if (refreshedResults.length > 0) {
+            for (const keyword of groupKeywords) {
+               const refreshedkeywordData = refreshedResults.find((k) => k && k.ID === keyword.ID);
+               if (refreshedkeywordData) {
+                  const updatedkeyword = await updateKeywordPosition(keyword, refreshedkeywordData, settings);
+                  updatedKeywords.push(updatedkeyword);
+               }
             }
          }
-      }
-   } else {
-      for (const keyword of rawkeyword) {
-         console.log('START SCRAPE: ', keyword.keyword);
-         const updatedkeyword = await refreshAndUpdateKeyword(keyword, settings);
-         updatedKeywords.push(updatedkeyword);
-         if (keywords.length > 0 && settings.scrape_delay && settings.scrape_delay !== '0') {
-            await sleep(parseInt(settings.scrape_delay, 10));
+      } else {
+         // Sequential scraping with delay
+         // Yandex: enforce minimum 5.5s delay (XMLRiver rate limit, error 203)
+         const isYandex = scraperType === 'xmlriver-yandex';
+         const minDelay = isYandex ? 5500 : 0;
+         const configuredDelay = settings.scrape_delay ? parseInt(settings.scrape_delay, 10) : 0;
+         const effectiveDelay = Math.max(minDelay, configuredDelay);
+
+         for (const keyword of groupKeywords) {
+            console.log('START SCRAPE: ', keyword.keyword, `[${scraperType}]`);
+            const updatedkeyword = await refreshAndUpdateKeyword(keyword, settings);
+            updatedKeywords.push(updatedkeyword);
+            if (groupKeywords.length > 1 && effectiveDelay > 0) {
+               await sleep(effectiveDelay);
+            }
          }
       }
    }

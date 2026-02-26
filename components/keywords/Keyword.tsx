@@ -45,7 +45,7 @@ const Keyword = (props: KeywordProps) => {
       maxTitleColumnWidth,
    } = props;
    const {
-      keyword, domain, ID, city, position, url = '', lastUpdated, country, sticky, history = {}, updating = false, lastUpdateError = false, volume,
+      keyword, domain, ID, city, position, url = '', lastUpdated, country, sticky, history = {}, updating = false, lastUpdateError = false, volume, engine,
    } = keywordData;
 
    const [showOptions, setShowOptions] = useState(false);
@@ -111,7 +111,13 @@ const Keyword = (props: KeywordProps) => {
             onClick={() => showKeywordDetails()}
             title={keyword}
             >
-               <span className={`fflag fflag-${country} w-[18px] h-[12px] mr-2`} title={countries[country][0]} />
+               <span className={`fflag fflag-${country} w-[18px] h-[12px] mr-1`} title={countries[country][0]} />
+               {engine === 'yandex' && (
+                  <span className='inline-block mr-1 text-[10px] font-bold text-red-500 bg-red-50 rounded px-1 leading-4' title='Yandex'>Y</span>
+               )}
+               {(engine === 'google' || !engine) && (
+                  <span className='inline-block mr-1 text-[10px] font-bold text-blue-500 bg-blue-50 rounded px-1 leading-4' title='Google'>G</span>
+               )}
                <span className='inline-block text-ellipsis overflow-hidden whitespace-nowrap w-[calc(100%-50px)]'>
                   {keyword}{city ? ` (${city})` : ''}
                </span>

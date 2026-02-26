@@ -5,6 +5,18 @@ import HttpsProxyAgent from 'https-proxy-agent';
 import countries from './countries';
 import allScrapers from '../scrapers/index';
 
+/**
+ * Resolve which scraper to use for a keyword.
+ * If keyword has engine='yandex', use xmlriver-yandex scraper.
+ * If engine='google' or null, use the global scraper from settings.
+ * This enables per-keyword engine selection while maintaining backward compatibility.
+ */
+export const resolveScraperType = (keyword: KeywordType, settings: SettingsType): string => {
+   if (keyword.engine === 'yandex') return 'xmlriver-yandex';
+   // engine='google' or null/undefined → use global scraper setting
+   return settings?.scraper_type || '';
+};
+
 type SearchResult = {
    title: string,
    url: string,
@@ -102,7 +114,7 @@ export const scrapeKeywordFromGoogle = async (keyword:KeywordType, settings:Sett
       result: keyword.lastResult,
       error: true,
    };
-   const scraperType = settings?.scraper_type || '';
+   const scraperType = resolveScraperType(keyword, settings);
    const scraperObj = allScrapers.find((scraper:ScraperSettings) => scraper.id === scraperType);
    const scraperClient = getScraperClient(keyword, settings, scraperObj);
 
