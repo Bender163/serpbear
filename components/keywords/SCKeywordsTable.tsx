@@ -28,7 +28,7 @@ const SCKeywordsTable = ({ domain, keywords = [], isLoading = true, isConsoleInt
    const router = useRouter();
    const [device, setDevice] = useState<string>('desktop');
    const [selectedKeywords, setSelectedKeywords] = useState<string[]>([]);
-   const [filterParams, setFilterParams] = useState<KeywordFilters>({ countries: [], tags: [], search: '' });
+   const [filterParams, setFilterParams] = useState<KeywordFilters>({ countries: [], tags: [], engines: [], search: '' });
    const [sortBy, setSortBy] = useState<string>('imp_desc');
    const [SCListHeight, setSCListHeight] = useState(500);
    const { keywordsData } = useFetchKeywords(router, domain?.domain || '');
