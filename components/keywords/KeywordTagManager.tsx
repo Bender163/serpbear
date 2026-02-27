@@ -21,7 +21,7 @@ const KeywordTagManager = ({ keyword, allTags = [], closeModal }: keywordTagMana
    };
 
    return (
-      <Modal closeModal={() => { closeModal(false); }} title={`Tags for Keyword "${keyword && keyword.keyword}"`}>
+      <Modal closeModal={() => { closeModal(false); }} title={`Теги ключевика "${keyword && keyword.keyword}"`}>
          <div className="text-sm my-8 ">
             {keyword && keyword.tags.length > 0 && (
                <ul>
@@ -37,7 +37,7 @@ const KeywordTagManager = ({ keyword, allTags = [], closeModal }: keywordTagMana
                   })}
                   <li className='inline-block py-1 px-1'>
                      <button
-                     title='Add New Tag'
+                     title='Добавить тег'
                      className="cursor-pointer rounded p-1 px-3 bg-indigo-600 text-white font-semibold text-sm"
                      onClick={() => setShowAddTag(true)}>+</button>
                   </li>
@@ -45,7 +45,7 @@ const KeywordTagManager = ({ keyword, allTags = [], closeModal }: keywordTagMana
             )}
             {keyword && keyword.tags.length === 0 && (
                <div className="text-center w-full text-gray-500">
-                  No Tags Added to this Keyword. <button className=' text-indigo-600' onClick={() => setShowAddTag(true)}>+ Add Tag</button>
+                  Нет тегов для этого ключевика. <button className=' text-indigo-600' onClick={() => setShowAddTag(true)}>+ Добавить тег</button>
                </div>
             )}
          </div>

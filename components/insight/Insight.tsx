@@ -26,10 +26,10 @@ const SCInsight = ({ insight, isLoading = true, isConsoleIntegrated = true, doma
 
    const renderTableHeader = () => {
       const headerNames: {[key:string]: string[]} = {
-         stats: ['Date', 'Avg Position', 'Visits', 'Impressions', 'CTR'],
-         keywords: ['Keyword', 'Avg Position', 'Visits ↑', 'Impressions', 'CTR', 'Countries'],
-         countries: ['Country', 'Avg Position', 'Visits ↑', 'Impressions', 'CTR', 'Keywords'],
-         pages: ['Page', 'Avg Position', 'Visits ↑', 'Impressions', 'CTR', 'Countries', 'Keywords'],
+         stats: ['Дата', 'Ср. позиция', 'Визиты', 'Показы', 'CTR'],
+         keywords: ['Ключевик', 'Ср. позиция', 'Визиты ↑', 'Показы', 'CTR', 'Страны'],
+         countries: ['Страна', 'Ср. позиция', 'Визиты ↑', 'Показы', 'CTR', 'Ключевики'],
+         pages: ['Страница', 'Ср. позиция', 'Визиты ↑', 'Показы', 'CTR', 'Страны', 'Ключевики'],
       };
 
       return (
@@ -75,7 +75,7 @@ const SCInsight = ({ insight, isLoading = true, isConsoleIntegrated = true, doma
                      <SelectField
                      options={['stats', 'keywords', 'countries', 'pages'].map((d) => { return { label: d, value: d }; })}
                      selected={[activeTab]}
-                     defaultLabel="Select Tab"
+                     defaultLabel="Выберите вкладку"
                      updateField={(updatedTab:[string]) => switchTab(updatedTab[0])}
                      multiple={false}
                      rounded={'rounded'}
@@ -86,7 +86,7 @@ const SCInsight = ({ insight, isLoading = true, isConsoleIntegrated = true, doma
                   {startDate && new Intl.DateTimeFormat('en-US', { dateStyle: 'medium' }).format(new Date(startDate))}
                   <span className='px-2 inline-block'>-</span>
                   {endDate && new Intl.DateTimeFormat('en-US', { dateStyle: 'medium' }).format(new Date(endDate))}
-                  <span className='ml-2'>(Last 30 Days)</span>
+                  <span className='ml-2'>(Последние 30 дней)</span>
                </div>
                )}
             </div>
@@ -113,11 +113,11 @@ const SCInsight = ({ insight, isLoading = true, isConsoleIntegrated = true, doma
                         )
                      }
                      {isConsoleIntegrated && isLoading && (
-                        <p className=' p-9 pt-[10%] text-center text-gray-500'>Loading Insight...</p>
+                        <p className=' p-9 pt-[10%] text-center text-gray-500'>Загрузка аналитики...</p>
                      )}
                      {!isConsoleIntegrated && (
                         <p className=' p-9 pt-[10%] text-center text-gray-500'>
-                        Google Search Console has not been Integrated yet. Please follow <a className='text-indigo-600 underline' href='https://docs.serpbear.com/miscellaneous/integrate-google-search-console' target="_blank" rel='noreferrer'>These Steps</a> to integrate Google Search Data for this Domain.
+                        Google Search Console не интегрирован. Следуйте <a className='text-indigo-600 underline' href='https://docs.serpbear.com/miscellaneous/integrate-google-search-console' target="_blank" rel='noreferrer'>инструкции</a> для интеграции данных Google Search для этого домена.
                         </p>
                      )}
                   </div>

@@ -133,14 +133,14 @@ const IdeasKeywordsTable = ({
          <div className='domKeywords flex flex-col bg-[white] rounded-md text-sm border mb-5'>
             {selectedKeywords.length > 0 && (
                <div className='font-semibold text-sm py-4 px-8 text-gray-500 '>
-                  <div className={`inline-block ${isResearchPage ? ' mr-2' : ''}`}>Add Keywords to Tracker</div>
+                  <div className={`inline-block ${isResearchPage ? ' mr-2' : ''}`}>Добавить в трекер</div>
                   {isResearchPage && (
                      <SelectField
                      selected={[]}
                      options={theDomains.map((d) => ({ label: d.domain, value: d.domain }))}
-                     defaultLabel={'Select a Domain'}
+                     defaultLabel={'Выберите домен'}
                      updateField={(updated:string[]) => updated[0] && setAddKeywordDomain(updated[0])}
-                     emptyMsg="No Domains Found"
+                     emptyMsg="Домены не найдены"
                      multiple={false}
                      inline={true}
                      rounded='rounded'
@@ -163,7 +163,7 @@ const IdeasKeywordsTable = ({
                   className='inline-block px-2 py-2 cursor-pointer hover:text-indigo-600'
                   onClick={() => addKeywordIdeasToTracker()}
                   >
-                     <span className=' text-white bg-blue-700 px-2 py-1 rounded font-semibold'>+ Add Keywords</span>
+                     <span className=' text-white bg-blue-700 px-2 py-1 rounded font-semibold'>+ Добавить</span>
                   </a>
                </div>
             )}
@@ -193,11 +193,11 @@ const IdeasKeywordsTable = ({
                               <Icon type="check" size={10} />
                         </button>
                      )}
-                        Keyword
+                        Ключевик
                      </span>
-                     <span className='domKeywords_head_vol flex-1 text-center'>Monthly Search</span>
-                     <span className='domKeywords_head_trend flex-1 text-center'>Search Trend</span>
-                     <span className='domKeywords_head_competition flex-1 text-center'>Competition</span>
+                     <span className='domKeywords_head_vol flex-1 text-center'>Ежемесячный поиск</span>
+                     <span className='domKeywords_head_trend flex-1 text-center'>Тренд</span>
+                     <span className='domKeywords_head_competition flex-1 text-center'>Конкуренция</span>
                   </div>
                   <div className='domKeywords_keywords border-gray-200 min-h-[55vh] relative' data-domain={domain?.domain}>
                      {!isLoading && finalKeywords && finalKeywords.length > 0 && (
@@ -215,21 +215,21 @@ const IdeasKeywordsTable = ({
                      )}
 
                      {isAdwordsIntegrated && isLoading && (
-                        <p className=' p-9 pt-[10%] text-center text-gray-500'>Loading Keywords Ideas...</p>
+                        <p className=' p-9 pt-[10%] text-center text-gray-500'>Загрузка идей ключевиков...</p>
                      )}
                      {isAdwordsIntegrated && noIdeasDatabase && !isLoading && (
                         <p className=' p-9 pt-[10%] text-center text-gray-500'>
-                           {'No keyword Ideas has been generated for this domain yet. Click the "Load Ideas" button to generate keyword ideas.'}
+                           {'Идеи ключевиков ещё не созданы для этого домена. Нажмите кнопку "Загрузить идеи" для генерации.'}
                         </p>
                      )}
                      {isAdwordsIntegrated && !isLoading && finalKeywords.length === 0 && !noIdeasDatabase && (
                         <p className=' p-9 pt-[10%] text-center text-gray-500'>
-                           {'No Keyword Ideas found. Please try generating Keyword Ideas again by clicking the "Load Ideas" button.'}
+                           {'Идеи ключевиков не найдены. Попробуйте заново, нажав кнопку "Загрузить идеи".'}
                         </p>
                      )}
                      {!isAdwordsIntegrated && (
                         <p className=' p-9 pt-[10%] text-center text-gray-500'>
-                           Google Ads has not been Integrated yet. Please follow <a className='text-indigo-600 underline' href='https://docs.serpbear.com/miscellaneous/integrate-google-ads' target="_blank" rel='noreferrer'>These Steps</a> to integrate Google Ads.
+                           Google Ads не интегрирован. Следуйте <a className='text-indigo-600 underline' href='https://docs.serpbear.com/miscellaneous/integrate-google-ads' target="_blank" rel='noreferrer'>инструкции</a> для интеграции Google Ads.
                         </p>
                      )}
                   </div>

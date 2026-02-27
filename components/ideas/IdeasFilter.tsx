@@ -27,12 +27,12 @@ const IdeasFilters = (props: IdeasFilterProps) => {
    };
 
    const sortOptionChoices: SelectionOption[] = [
-      { value: 'alpha_asc', label: 'Alphabetically(A-Z)' },
-      { value: 'alpha_desc', label: 'Alphabetically(Z-A)' },
-      { value: 'vol_asc', label: 'Lowest Search Volume' },
-      { value: 'vol_desc', label: 'Highest Search Volume' },
-      { value: 'competition_asc', label: 'High Competition' },
-      { value: 'competition_desc', label: 'Low Competition' },
+      { value: 'alpha_asc', label: 'По алфавиту (А-Я)' },
+      { value: 'alpha_desc', label: 'По алфавиту (Я-А)' },
+      { value: 'vol_asc', label: 'Мин. частотность' },
+      { value: 'vol_desc', label: 'Макс. частотность' },
+      { value: 'competition_asc', label: 'Высокая конкуренция' },
+      { value: 'competition_desc', label: 'Низкая конкуренция' },
    ];
 
    const sortItemStyle = (sortType:string) => {
@@ -52,7 +52,7 @@ const IdeasFilters = (props: IdeasFilterProps) => {
                className={`${deviceTabStyle} ${keywordType === 'all' ? ' bg-[#F8F9FF] text-gray-700' : ''}`}
                onClick={() => { setKeywordType('all'); showFavorites(false); }}>
                      <Icon type='keywords' classes='top-[3px]' size={15} />
-                     <i className='hidden not-italic lg:inline-block ml-1'>All Keywords</i>
+                     <i className='hidden not-italic lg:inline-block ml-1'>Все ключевики</i>
                      <span className={`${deviceTabCountStyle}`}>{keywords.length}</span>
                </li>
                <li
@@ -60,7 +60,7 @@ const IdeasFilters = (props: IdeasFilterProps) => {
                className={`${deviceTabStyle} ${keywordType === 'favorites' ? ' bg-[#F8F9FF] text-gray-700' : ''}`}
                onClick={() => { setKeywordType('favorites'); showFavorites(true); }}>
                      <Icon type='star' classes='top-[4px]' />
-                     <i className='hidden not-italic lg:inline-block ml-1'>Favorites</i>
+                     <i className='hidden not-italic lg:inline-block ml-1'>Избранные</i>
                      <span className={`${deviceTabCountStyle}`}>{favorites.length}</span>
                </li>
             </ul>
@@ -72,7 +72,7 @@ const IdeasFilters = (props: IdeasFilterProps) => {
                   <button
                   data-testid="filter_button"
                   className={`px-2 py-1 rounded ${filterOptions ? ' bg-indigo-100 text-blue-700' : ''}`}
-                  title='Filter'
+                  title='Фильтр'
                   onClick={() => showFilterOptions(!filterOptions)}>
                      <Icon type="filter" size={18} />
                   </button>
@@ -83,9 +83,9 @@ const IdeasFilters = (props: IdeasFilterProps) => {
                         <SelectField
                            selected={filterParams.tags}
                            options={allTags.map((tag:string) => ({ label: tag, value: tag }))}
-                           defaultLabel={`All Groups (${allTags.length})`}
+                           defaultLabel={`Все группы (${allTags.length})`}
                            updateField={(updated:string[]) => filterTags(updated)}
-                           emptyMsg="No Groups Found for this Domain"
+                           emptyMsg="Группы не найдены для этого домена"
                            minWidth={270}
                         />
                      </div>
@@ -96,7 +96,7 @@ const IdeasFilters = (props: IdeasFilterProps) => {
                         className={`border w-44 lg:w-36 focus:w-44 transition-all rounded-3xl 
                         p-1.5 px-4 outline-none ring-0 focus:border-indigo-200`}
                         type="text"
-                        placeholder='Filter Keywords...'
+                        placeholder='Фильтр ключевиков...'
                         onChange={searchKeywords}
                         value={filterParams.search}
                      />
@@ -106,7 +106,7 @@ const IdeasFilters = (props: IdeasFilterProps) => {
                   <button
                   data-testid="sort_button"
                   className={`px-2 py-1 rounded ${sortOptions ? ' bg-indigo-100 text-blue-700' : ''}`}
-                  title='Sort'
+                  title='Сортировка'
                   onClick={() => showSortOptions(!sortOptions)}>
                      <Icon type="sort" size={18} />
                   </button>

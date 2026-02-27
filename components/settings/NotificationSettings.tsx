@@ -20,16 +20,16 @@ const NotificationSettings = ({ settings, settingsError, updateSettings }:Notifi
          <div className='settings__content styled-scrollbar p-6 text-sm'>
             <div className="settings__section__input mb-5">
                <SelectField
-               label='Notification Frequency'
+               label='Частота уведомлений'
                   multiple={false}
                   selected={[settings.notification_interval]}
                   options={[
-                     { label: 'Daily', value: 'daily' },
-                     { label: 'Weekly', value: 'weekly' },
-                     { label: 'Monthly', value: 'monthly' },
-                     { label: 'Never', value: 'never' },
+                     { label: 'Ежедневно', value: 'daily' },
+                     { label: 'Еженедельно', value: 'weekly' },
+                     { label: 'Ежемесячно', value: 'monthly' },
+                     { label: 'Никогда', value: 'never' },
                   ]}
-                  defaultLabel={'Notification Settings'}
+                  defaultLabel={'Настройки уведомлений'}
                   updateField={(updated:string[]) => updated[0] && updateSettings('notification_interval', updated[0])}
                   rounded='rounded'
                   maxHeight={48}
@@ -40,7 +40,7 @@ const NotificationSettings = ({ settings, settingsError, updateSettings }:Notifi
                <>
                   <div className="settings__section__input mb-5">
                      <InputField
-                     label='Notification Emails'
+                     label='Email для уведомлений'
                      hasError={settingsError?.type === 'no_email'}
                      value={settings?.notification_email}
                      placeholder={'test@gmail.com, test2@test.com'}
@@ -49,7 +49,7 @@ const NotificationSettings = ({ settings, settingsError, updateSettings }:Notifi
                   </div>
                   <div className="settings__section__input mb-5">
                      <InputField
-                     label='SMTP Server'
+                     label='SMTP-сервер'
                      hasError={settingsError?.type === 'no_smtp_server'}
                      value={settings?.smtp_server || ''}
                      placeholder={'test@gmail.com, test2@test.com'}
@@ -58,7 +58,7 @@ const NotificationSettings = ({ settings, settingsError, updateSettings }:Notifi
                   </div>
                   <div className="settings__section__input mb-5">
                      <InputField
-                     label='SMTP Port'
+                     label='SMTP-порт'
                      hasError={settingsError?.type === 'no_smtp_port'}
                      value={settings?.smtp_port || ''}
                      placeholder={'2234'}
@@ -67,7 +67,7 @@ const NotificationSettings = ({ settings, settingsError, updateSettings }:Notifi
                   </div>
                   <div className="settings__section__input mb-5">
                      <InputField
-                        label='SMTP Username'
+                        label='SMTP логин'
                         hasError={settingsError?.type === 'no_smtp_port'}
                         value={settings?.smtp_username || ''}
                         onChange={(value:string) => updateSettings('smtp_username', value)}
@@ -75,14 +75,14 @@ const NotificationSettings = ({ settings, settingsError, updateSettings }:Notifi
                   </div>
                   <div className="settings__section__input mb-5">
                      <SecretField
-                     label='SMTP Password'
+                     label='SMTP пароль'
                      value={settings?.smtp_password || ''}
                      onChange={(value:string) => updateSettings('smtp_password', value)}
                      />
                   </div>
                   <div className="settings__section__input mb-5">
                         <InputField
-                        label='From Email Address'
+                        label='Email отправителя'
                         hasError={settingsError?.type === 'no_smtp_from'}
                         value={settings?.notification_email_from || ''}
                         placeholder="no-reply@mydomain.com"
@@ -91,10 +91,10 @@ const NotificationSettings = ({ settings, settingsError, updateSettings }:Notifi
                   </div>
                   <div className="settings__section__input mb-5">
                         <InputField
-                        label='Email From Name'
+                        label='Имя отправителя'
                         hasError={settingsError?.type === 'no_smtp_from'}
-                        value={settings?.notification_email_from_name || 'Serpbear'}
-                        placeholder="Serpbear"
+                        value={settings?.notification_email_from_name || 'SERP Трекер'}
+                        placeholder="SERP Трекер"
                         onChange={(value:string) => updateSettings('notification_email_from_name', value)}
                         />
                   </div>

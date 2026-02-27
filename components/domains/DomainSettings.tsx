@@ -63,7 +63,7 @@ const DomainSettings = ({ domain, closeModal }: DomainSettingsProps) => {
                      text-gray-600 border border-b-0 relative top-[1px] rounded-b-none`;
    return (
       <div>
-         <Modal closeModal={() => closeModal(false)} title={'Domain Settings'} width="[500px]" verticalCenter={currentTab === 'searchconsole'} >
+         <Modal closeModal={() => closeModal(false)} title={'Настройки домена'} width="[500px]" verticalCenter={currentTab === 'searchconsole'} >
             <div data-testid="domain_settings" className=" text-sm">
                <div className=' mt-3 mb-5 border  border-slate-200 px-2 py-4 pb-0
                relative left-[-20px] w-[calc(100%+40px)] border-l-0 border-r-0 bg-[#f8f9ff]'>
@@ -71,7 +71,7 @@ const DomainSettings = ({ domain, closeModal }: DomainSettingsProps) => {
                      <li
                      className={`${tabStyle} ${currentTab === 'notification' ? ' bg-white text-blue-600 border-slate-200' : 'border-transparent'} `}
                      onClick={() => setCurrentTab('notification')}>
-                       <Icon type='email' /> Notification
+                       <Icon type='email' /> Уведомления
                      </li>
                      <li
                      className={`${tabStyle} ${currentTab === 'searchconsole' ? ' bg-white text-blue-600 border-slate-200' : 'border-transparent'}`}
@@ -85,21 +85,21 @@ const DomainSettings = ({ domain, closeModal }: DomainSettingsProps) => {
                   {currentTab === 'notification' && (
                      <div className="mb-4 flex justify-between items-center w-full">
                         <InputField
-                        label='Notification Emails'
+                        label='Email для уведомлений'
                         onChange={(emails:string) => setDomainSettings({ ...domainSettings, notification_emails: emails })}
                         value={domainSettings.notification_emails || ''}
-                        placeholder='Your Emails'
+                        placeholder='Ваш email'
                         />
                      </div>
                   )}
                   {currentTab === 'searchconsole' && (
                      <>
                         <div className="mb-4 flex justify-between items-center w-full">
-                           <label className='mb-2 font-semibold inline-block text-sm text-gray-700 capitalize'>Property Type</label>
+                           <label className='mb-2 font-semibold inline-block text-sm text-gray-700 capitalize'>Тип ресурса</label>
                            <SelectField
                            options={[{ label: 'Domain', value: 'domain' }, { label: 'URL', value: 'url' }]}
                            selected={[domainSettings.search_console?.property_type || 'domain']}
-                           defaultLabel="Select Search Console Property Type"
+                           defaultLabel="Выберите тип ресурса"
                            updateField={(updated:['domain'|'url']) => setDomainSettings({
                               ...domainSettings,
                               search_console: { ...(domainSettings.search_console as DomainSearchConsole), property_type: updated[0] || 'domain' },
@@ -111,19 +111,19 @@ const DomainSettings = ({ domain, closeModal }: DomainSettingsProps) => {
                         {domainSettings?.search_console?.property_type === 'url' && (
                            <div className="mb-4 flex justify-between items-center w-full">
                               <InputField
-                              label='Property URL (Required)'
+                              label='URL ресурса (обязательно)'
                               onChange={(url:string) => setDomainSettings({
                                  ...domainSettings,
                                  search_console: { ...(domainSettings.search_console as DomainSearchConsole), url },
                               })}
                               value={domainSettings?.search_console?.url || ''}
-                              placeholder='Search Console Property URL. eg: https://mywebsite.com/'
+                              placeholder='URL ресурса Search Console. Например: https://mywebsite.com/'
                               />
                            </div>
                         )}
                         <div className="mb-4 flex justify-between items-center w-full">
                            <InputField
-                           label='Search Console Client Email'
+                           label='Email сервисного аккаунта'
                            onChange={(client_email:string) => setDomainSettings({
                               ...domainSettings,
                               search_console: { ...(domainSettings.search_console as DomainSearchConsole), client_email },
@@ -133,7 +133,7 @@ const DomainSettings = ({ domain, closeModal }: DomainSettingsProps) => {
                            />
                         </div>
                         <div className="mb-4 flex flex-col justify-between items-center w-full">
-                           <label className='mb-2 font-semibold block text-sm text-gray-700 capitalize w-full'>Search Console Private Key</label>
+                           <label className='mb-2 font-semibold block text-sm text-gray-700 capitalize w-full'>Приватный ключ Search Console</label>
                            <textarea
                               className={`w-full p-2 border border-gray-200 rounded mb-3 text-xs 
                               focus:outline-none h-[100px] focus:border-blue-200`}
@@ -160,29 +160,29 @@ const DomainSettings = ({ domain, closeModal }: DomainSettingsProps) => {
                <button
                className="text-sm font-semibold text-red-500"
                onClick={() => setShowRemoveDomain(true)}>
-                  <Icon type="trash" /> Remove Domain
+                  <Icon type="trash" /> Удалить домен
                </button>
                <button
                className={`text-sm font-semibold py-2 px-5 rounded cursor-pointer bg-blue-700 text-white ${isUpdating ? 'cursor-not-allowed' : ''}`}
                onClick={() => !isUpdating && updateDomain()}>
-                  {isUpdating && <Icon type='loading' />} Update Settings
+                  {isUpdating && <Icon type='loading' />} Сохранить
                </button>
             </div>
          </Modal>
          {showRemoveDomain && domain && (
-            <Modal closeModal={() => setShowRemoveDomain(false) } title={`Remove Domain ${domain.domain}`}>
+            <Modal closeModal={() => setShowRemoveDomain(false) } title={`Удалить домен ${domain.domain}`}>
                <div className='text-sm'>
-                  <p>Are you sure you want to remove this Domain? Removing this domain will remove all its keywords.</p>
+                  <p>Вы уверены, что хотите удалить этот домен? Все ключевики домена будут удалены.</p>
                   <div className='mt-6 text-right font-semibold'>
                      <button
                      className=' py-1 px-5 rounded cursor-pointer bg-indigo-50 text-slate-500 mr-3'
                      onClick={() => setShowRemoveDomain(false)}>
-                        Cancel
+                        Отмена
                      </button>
                      <button
                      className=' py-1 px-5 rounded cursor-pointer bg-red-400 text-white'
                      onClick={() => deleteMutate(domain)}>
-                        Remove
+                        Удалить
 
                      </button>
                   </div>

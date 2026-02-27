@@ -22,11 +22,11 @@ const KeywordDetails = ({ keyword, closeDetails }:KeywordDetailsProps) => {
    const keywordHistory: KeywordHistory = keywordData?.history || keyword.history;
    const keywordSearchResult: KeywordLastResult = keywordData?.searchResult || keyword.history;
    const dateOptions = [
-      { label: 'Last 7 Days', value: '7' },
-      { label: 'Last 30 Days', value: '30' },
-      { label: 'Last 90 Days', value: '90' },
-      { label: '1 Year', value: '360' },
-      { label: 'All Time', value: 'all' },
+      { label: '7 дней', value: '7' },
+      { label: '30 дней', value: '30' },
+      { label: '90 дней', value: '90' },
+      { label: '1 год', value: '360' },
+      { label: 'Всё время', value: 'all' },
    ];
 
    useOnKey('Escape', closeDetails);
@@ -60,7 +60,7 @@ const KeywordDetails = ({ keyword, closeDetails }:KeywordDetailsProps) => {
                      className={`fflag fflag-${keyword.country} w-[18px] h-[12px] mr-2`} /> {keyword.keyword}
                      <span
                      className={`py-1 px-2 ml-2 rounded bg-blue-50 ${keyword.position === 0 ? 'text-gray-500' : 'text-blue-700'}  text-xs font-bold`}>
-                        {keyword.position === 0 ? 'Not in First 100' : keyword.position}
+                        {keyword.position === 0 ? 'Не в ТОП-100' : keyword.position}
                      </span>
                   </h3>
                   <button
@@ -73,12 +73,12 @@ const KeywordDetails = ({ keyword, closeDetails }:KeywordDetailsProps) => {
 
                   <div className='keywordDetails__section'>
                      <div className="keywordDetails__section__head flex justify-between mb-5">
-                        <h3 className=' font-bold text-gray-700 text-lg'>SERP History</h3>
+                        <h3 className=' font-bold text-gray-700 text-lg'>История позиций</h3>
                         <div className="keywordDetails__section__chart_select mr-3">
                            <SelectField
                            options={dateOptions}
                            selected={[chartTime]}
-                           defaultLabel="Select Date"
+                           defaultLabel="Период"
                            updateField={(updatedTime:[string]) => setChartTime(updatedTime[0])}
                            multiple={false}
                            rounded={'rounded'}
@@ -91,7 +91,7 @@ const KeywordDetails = ({ keyword, closeDetails }:KeywordDetailsProps) => {
                   </div>
                   <div className='keywordDetails__section mt-10'>
                      <div className="keywordDetails__section__head flex justify-between items-center pb-4 mb-4 border-b border-b-slate-200">
-                        <h3 className=' font-bold text-gray-700 lg:text-lg'>Google Search Result
+                        <h3 className=' font-bold text-gray-700 lg:text-lg'>Результаты поиска
                            <a className='text-gray-400 hover:text-indigo-600 inline-block ml-1 px-2 py-1'
                               href={`https://www.google.com/search?q=${encodeURI(keyword.keyword)}`}
                               target="_blank"

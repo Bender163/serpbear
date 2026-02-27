@@ -42,7 +42,7 @@ const DomainHeader = (
                <SelectField
                options={domains && domains.length > 0 ? domains.map((d) => { return { label: d.domain, value: d.slug }; }) : []}
                selected={[domain.slug]}
-               defaultLabel="Select Domain"
+               defaultLabel="Выберите домен"
                updateField={(updateSlug:[string]) => updateSlug && updateSlug[0] && router.push(`${updateSlug[0]}`)}
                multiple={false}
                rounded={'rounded'}
@@ -54,36 +54,36 @@ const DomainHeader = (
             <li className={`${tabStyle} ${router.pathname === '/domain/[slug]' ? 'bg-white border border-b-0 font-semibold' : ''}`}>
                <Link href={`/domain/${domain.slug}`} passHref={true}>
                   <a className='px-4 py-2 inline-block'><Icon type="tracking" color='#999' classes='hidden lg:inline-block' />
-                     <span className='text-xs lg:text-sm lg:ml-2'>Tracking</span>
+                     <span className='text-xs lg:text-sm lg:ml-2'>Трекинг</span>
                   </a>
                </Link>
             </li>
             <li className={`${tabStyle} ${router.pathname === '/domain/console/[slug]' ? 'bg-white border border-b-0 font-semibold' : ''}`}>
                <Link href={`/domain/console/${domain.slug}`} passHref={true}>
                   <a className='px-4 py-2 inline-block'><Icon type="google" size={13} classes='hidden lg:inline-block' />
-                     <span className='text-xs lg:text-sm lg:ml-2'>Discover</span>
-                     <Icon type='help' size={14} color="#aaa" classes="ml-2 hidden lg:inline-block" title='Discover Keywords you already Rank For' />
+                     <span className='text-xs lg:text-sm lg:ml-2'>Обнаружение</span>
+                     <Icon type='help' size={14} color="#aaa" classes="ml-2 hidden lg:inline-block" title='Ключевики, по которым вы уже ранжируетесь' />
                   </a>
                </Link>
             </li>
             <li className={`${tabStyle} ${router.pathname === '/domain/insight/[slug]' ? 'bg-white border border-b-0 font-semibold' : ''}`}>
                <Link href={`/domain/insight/${domain.slug}`} passHref={true}>
                   <a className='px-4 py-2 inline-block'><Icon type="google" size={13} classes='hidden lg:inline-block' />
-                     <span className='text-xs lg:text-sm lg:ml-2'>Insight</span>
-                     <Icon type='help' size={14} color="#aaa" classes="ml-2 hidden lg:inline-block" title='Insight for Google Search Console Data' />
+                     <span className='text-xs lg:text-sm lg:ml-2'>Аналитика</span>
+                     <Icon type='help' size={14} color="#aaa" classes="ml-2 hidden lg:inline-block" title='Аналитика данных Google Search Console' />
                   </a>
                </Link>
             </li>
             <li className={`${tabStyle} ${router.pathname === '/domain/ideas/[slug]' ? 'bg-white border border-b-0 font-semibold' : ''}`}>
                <Link href={`/domain/ideas/${domain.slug}`} passHref={true}>
                   <a className='px-4 py-2 inline-block'><Icon type="adwords" size={13} classes='hidden lg:inline-block' />
-                     <span className='text-xs lg:text-sm lg:ml-2'>Ideas</span>
+                     <span className='text-xs lg:text-sm lg:ml-2'>Идеи</span>
                      <Icon
                      type='help'
                      size={14}
                      color="#aaa"
                      classes="ml-2 hidden lg:inline-block"
-                     title='Get Keyword Ideas for this domain from Google Ads'
+                     title='Получить идеи ключевиков из Google Ads'
                      />
                   </a>
                </Link>
@@ -104,7 +104,7 @@ const DomainHeader = (
                   className={`domheader_action_button relative ${buttonStyle}`}
                   aria-pressed="false"
                   onClick={() => exportCsv()}>
-                     <Icon type='download' size={20} /><i className={`${buttonLabelStyle}`}>Export as csv</i>
+                     <Icon type='download' size={20} /><i className={`${buttonLabelStyle}`}>Экспорт CSV</i>
                   </button>
                )}
                {!isConsole && !isInsight && !isIdeas && (
@@ -112,7 +112,7 @@ const DomainHeader = (
                   className={`domheader_action_button relative ${buttonStyle} lg:ml-3`}
                   aria-pressed="false"
                   onClick={() => refreshMutate({ ids: [], domain: domain.domain })}>
-                     <Icon type='reload' size={14} /><i className={`${buttonLabelStyle}`}>Reload All Serps</i>
+                     <Icon type='reload' size={14} /><i className={`${buttonLabelStyle}`}>Обновить позиции</i>
                   </button>
                 )}
                <button
@@ -120,7 +120,7 @@ const DomainHeader = (
                className={`domheader_action_button relative ${buttonStyle} lg:ml-3`}
                aria-pressed="false"
                onClick={() => showSettingsModal(true)}><Icon type='settings' size={20} />
-                  <i className={`${buttonLabelStyle}`}>Domain Settings</i>
+                  <i className={`${buttonLabelStyle}`}>Настройки домена</i>
                </button>
             </div>
             {!isConsole && !isInsight && !isIdeas && (
@@ -130,7 +130,7 @@ const DomainHeader = (
                onClick={() => showAddModal(true)}>
                   <span
                   className='text-center leading-4 mr-2 inline-block rounded-full w-7 h-7 pt-1 bg-blue-700 text-white font-bold text-lg'>+</span>
-                  <i className=' not-italic hidden lg:inline-block'>Add Keyword</i>
+                  <i className=' not-italic hidden lg:inline-block'>Добавить ключевик</i>
                </button>
             )}
             {isConsole && (
@@ -162,7 +162,7 @@ const DomainHeader = (
                   className='text-center leading-4 mr-2 inline-block rounded-full w-7 h-7 pt-1 bg-blue-700 text-white font-bold text-lg'>
                      <Icon type='reload' size={12} />
                   </span>
-                  <i className=' not-italic hidden lg:inline-block'>Load Ideas</i>
+                  <i className=' not-italic hidden lg:inline-block'>Загрузить идеи</i>
                </button>
             )}
          </div>

@@ -19,7 +19,7 @@ const AddTags = ({ keywords = [], existingTags = [], closeModal }: AddTagsProps)
    const addTag = () => {
       if (keywords.length === 0) { return; }
       if (!tagInput && keywords.length > 1) {
-         setInputError('Please Insert a Tag!');
+         setInputError('Введите тег!');
          setTimeout(() => { setInputError(''); }, 3000);
          return;
       }
@@ -33,7 +33,7 @@ const AddTags = ({ keywords = [], existingTags = [], closeModal }: AddTagsProps)
    };
 
    return (
-      <Modal closeModal={() => { closeModal(false); }} title={`Add New Tags to ${keywords.length} Selected Keyword`}>
+      <Modal closeModal={() => { closeModal(false); }} title={`Добавить теги к ${keywords.length} ключевику(ам)`}>
          <div className="relative">
             {inputError && <span className="absolute top-[-24px] text-red-400 text-sm font-semibold">{inputError}</span>}
             <span className='absolute text-gray-400 top-3 left-2 cursor-pointer' onClick={() => setShowSuggestions(!showSuggestions)}>
@@ -43,7 +43,7 @@ const AddTags = ({ keywords = [], existingTags = [], closeModal }: AddTagsProps)
             <input
                ref={inputRef}
                className='w-full border rounded border-gray-200 py-3 px-4 pl-12 outline-none focus:border-indigo-300'
-               placeholder='Insert Tags. eg: tag1, tag2'
+               placeholder='Введите теги, например: тег1, тег2'
                value={tagInput}
                onChange={(e) => setTagInput(e.target.value)}
                onKeyDown={(e) => {
@@ -70,14 +70,14 @@ const AddTags = ({ keywords = [], existingTags = [], closeModal }: AddTagsProps)
                                  <Icon type='tags' size={14} color='#bbb' /> {tag}
                               </li>;
                   })}
-                  {existingTags.length === 0 && <p>No Existing Tags Found... </p>}
+                  {existingTags.length === 0 && <p>Существующих тегов не найдено... </p>}
                </ul>
             )}
 
             <button
             className=" absolute right-2 top-2 cursor-pointer rounded p-2 px-4 bg-indigo-600 text-white font-semibold text-sm"
             onClick={addTag}>
-               Apply
+               Применить
             </button>
          </div>
       </Modal>

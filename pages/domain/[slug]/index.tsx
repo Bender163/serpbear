@@ -51,12 +51,12 @@ const SingleDomain: NextPage = () => {
       <div className="Domain ">
          {((!scraper_type || (scraper_type === 'none')) && !isAppSettingsLoading) && (
                <div className=' p-3 bg-red-600 text-white text-sm text-center'>
-                  A Scrapper/Proxy has not been set up Yet. Open Settings to set it up and start using the app.
+                  Сервис сбора данных / прокси не настроен. Откройте Настройки для настройки.
                </div>
          )}
          {activDomain && activDomain.domain
          && <Head>
-               <title>{`${activDomain.domain} - SerpBear` } </title>
+               <title>{`${activDomain.domain} — SERP Трекер` } </title>
             </Head>
          }
          <TopBar showSettings={() => setShowSettings(true)} showAddModal={() => setShowAddDomain(true)} />

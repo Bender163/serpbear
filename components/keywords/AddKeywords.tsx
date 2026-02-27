@@ -68,7 +68,7 @@ const AddKeywords = ({ closeModal, domain, keywords, scraperName = '', allowsCit
          );
 
          if (!multiDevice && (keywordsArray.length === 1 || currentKeywords.length === keywordExist.length) && keywordExist.length > 0) {
-            setError(`Keywords ${keywordExist.join(',')} already Exist`);
+            setError(`Ключевики ${keywordExist.join(',')} уже существуют`);
             setTimeout(() => { setError(''); }, 3000);
          } else {
             const newKeywords = keywordsArray.flatMap((k) =>
@@ -88,7 +88,7 @@ const AddKeywords = ({ closeModal, domain, keywords, scraperName = '', allowsCit
             addMutate(newKeywords);
          }
       } else {
-         setError('Please Insert a Keyword');
+         setError('Введите ключевик');
          setTimeout(() => { setError(''); }, 3000);
       }
    };
@@ -96,13 +96,13 @@ const AddKeywords = ({ closeModal, domain, keywords, scraperName = '', allowsCit
    const deviceTabStyle = 'cursor-pointer px-2 py-2 rounded';
 
    return (
-      <Modal closeModal={() => { closeModal(false); }} title={'Add New Keywords'} width="[420px]">
+      <Modal closeModal={() => { closeModal(false); }} title={'Добавить ключевики'} width="[420px]">
          <div data-testid="addkeywords_modal">
             <div>
                <div>
                   <textarea
                      className='w-full h-40 border rounded border-gray-200 p-4 outline-none focus:border-indigo-300'
-                     placeholder="Type or Paste Keywords here. Insert Each keyword in a New line."
+                     placeholder="Введите или вставьте ключевики. Каждый на новой строке."
                      value={newKeywordsData.keywords}
                      onChange={(e) => setNewKeywordsData({ ...newKeywordsData, keywords: e.target.value })}>
                   </textarea>
@@ -114,7 +114,7 @@ const AddKeywords = ({ closeModal, domain, keywords, scraperName = '', allowsCit
                      multiple={false}
                      selected={[newKeywordsData.country]}
                      options={Object.keys(countries).map((countryISO:string) => { return { label: countries[countryISO][0], value: countryISO }; })}
-                     defaultLabel='All Countries'
+                     defaultLabel='Все страны'
                      updateField={(updated:string[]) => {
                         setNewKeywordsData({ ...newKeywordsData, country: updated[0] });
                         localStorage.setItem('default_country', updated[0]);
@@ -140,7 +140,7 @@ const AddKeywords = ({ closeModal, domain, keywords, scraperName = '', allowsCit
                   </ul>
                </div>
                <div className='my-3 flex justify-between text-sm items-center'>
-                  <span className='text-xs font-semibold text-gray-500 mr-3'>Search Engine:</span>
+                  <span className='text-xs font-semibold text-gray-500 mr-3'>Поисковик:</span>
                   <ul className='flex text-xs font-semibold text-gray-500'>
                      <li
                         className={`${deviceTabStyle} mr-2 ${newKeywordsData.engine === 'google' ? '  bg-indigo-50 text-indigo-700' : ''}`}
@@ -157,7 +157,7 @@ const AddKeywords = ({ closeModal, domain, keywords, scraperName = '', allowsCit
                <div className='relative'>
                   <input
                      className='w-full border rounded border-gray-200 py-2 px-4 pl-12 outline-none focus:border-indigo-300'
-                     placeholder='Insert Tags (Optional)'
+                     placeholder='Теги (необязательно)'
                      value={newKeywordsData.tags}
                      onChange={(e) => setNewKeywordsData({ ...newKeywordsData, tags: e.target.value })}
                   />
@@ -183,7 +183,7 @@ const AddKeywords = ({ closeModal, domain, keywords, scraperName = '', allowsCit
                                        <Icon type='tags' size={14} color='#bbb' /> {tag}
                                     </li>;
                         })}
-                        {existingTags.length === 0 && <p>No Existing Tags Found... </p>}
+                        {existingTags.length === 0 && <p>Существующих тегов не найдено... </p>}
                      </ul>
                   )}
                </div>
@@ -192,8 +192,8 @@ const AddKeywords = ({ closeModal, domain, keywords, scraperName = '', allowsCit
                      className={`w-full border rounded border-gray-200 py-2 px-4 pl-8 
                      outline-none focus:border-indigo-300 ${!allowsCity ? ' cursor-not-allowed' : ''} `}
                      disabled={!allowsCity}
-                     title={!allowsCity ? `Your scraper ${scraperName} doesn't have city level scraping feature.` : ''}
-                     placeholder={`City (Optional)${!allowsCity ? `. Not available for ${scraperName}.` : ''}`}
+                     title={!allowsCity ? `Скрапер ${scraperName} не поддерживает поиск по городам.` : ''}
+                     placeholder={`Город (необязательно)${!allowsCity ? `. Недоступно для ${scraperName}.` : ''}`}
                      value={newKeywordsData.city}
                      onChange={(e) => setNewKeywordsData({ ...newKeywordsData, city: e.target.value })}
                   />
@@ -205,12 +205,12 @@ const AddKeywords = ({ closeModal, domain, keywords, scraperName = '', allowsCit
                <button
                   className=' py-2 px-5 rounded cursor-pointer bg-indigo-50 text-slate-500 mr-3'
                   onClick={() => closeModal(false)}>
-                     Cancel
+                     Отмена
                </button>
                <button
                   className=' py-2 px-5 rounded cursor-pointer bg-blue-700 text-white'
                   onClick={() => !isAdding && addKeywords()}>
-                     {isAdding ? 'Adding....' : 'Add Keywords'}
+                     {isAdding ? 'Добавление...' : 'Добавить'}
                </button>
             </div>
          </div>

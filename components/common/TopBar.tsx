@@ -25,7 +25,7 @@ const TopBar = ({ showSettings, showAddModal }:TopbarProps) => {
             router.push('/login');
          }
       } catch (fetchError) {
-         toast('Could not login, Ther Server is not responsive.', { icon: '⚠️' });
+         toast('Сервер не отвечает.', { icon: '⚠️' });
       }
    };
 
@@ -34,14 +34,14 @@ const TopBar = ({ showSettings, showAddModal }:TopbarProps) => {
        ${isDomainsPage ? 'max-w-5xl lg:justify-between' : 'max-w-7xl lg:justify-end'}  bg-white lg:bg-transparent`}>
 
          <h3 className={`p-4 text-base font-bold text-blue-700 ${isDomainsPage ? 'lg:pl-0' : 'lg:hidden'}`}>
-            <span className=' relative top-[3px] mr-1'><Icon type="logo" size={24} color="#364AFF" /></span> SerpBear
+            <span className=' relative top-[3px] mr-1'>📊</span> SERP Трекер
             <button className='px-3 py-1 font-bold text-blue-700  lg:hidden ml-3 text-lg' onClick={() => showAddModal()}>+</button>
          </h3>
          {!isDomainsPage && router.asPath !== '/research' && (
             <Link href={'/domains'} passHref={true}>
                <a className=' right-14 top-2 px-2 py-1 cursor-pointer bg-[#ecf2ff] hover:bg-indigo-100 transition-all
                absolute lg:top-3 lg:right-auto lg:left-8 lg:px-3 lg:py-2 rounded-full'>
-                  <Icon type="caret-left" size={16} title="Go Back" />
+                  <Icon type="caret-left" size={16} title="Назад" />
                </a>
             </Link>
          )}
@@ -55,30 +55,30 @@ const TopBar = ({ showSettings, showAddModal }:TopbarProps) => {
                <li className={`block lg:inline-block lg:ml-5 ${router.asPath === '/domains' ? ' text-blue-700' : ''}`}>
                   <Link href={'/domains'} passHref={true}>
                      <a className='block px-3 py-2 cursor-pointer'>
-                        <Icon type="domains" color={router.asPath === '/domains' ? '#1d4ed8' : '#888'} size={14} /> Domains
+                        <Icon type="domains" color={router.asPath === '/domains' ? '#1d4ed8' : '#888'} size={14} /> Домены
                      </a>
                   </Link>
                </li>
                <li className={`block lg:inline-block lg:ml-5 ${router.asPath === '/research' ? ' text-blue-700' : ''}`}>
                   <Link href={'/research'} passHref={true}>
                      <a className='block px-3 py-2 cursor-pointer'>
-                        <Icon type="research" color={router.asPath === '/research' ? '#1d4ed8' : '#888'} size={14} /> Research
+                        <Icon type="research" color={router.asPath === '/research' ? '#1d4ed8' : '#888'} size={14} /> Исследование
                      </a>
                   </Link>
                </li>
                <li className='block lg:inline-block lg:ml-5'>
                   <a className='block px-3 py-2 cursor-pointer' onClick={() => showSettings()}>
-                     <Icon type="settings-alt" color={'#888'} size={14} /> Settings
+                     <Icon type="settings-alt" color={'#888'} size={14} /> Настройки
                   </a>
                </li>
                <li className='block lg:inline-block lg:ml-5'>
-                  <a className='block px-3 py-2 cursor-pointer' href='https://docs.serpbear.com/' target="_blank" rel='noreferrer'>
-                     <Icon type="question" color={'#888'} size={14} /> Help
+                  <a className='block px-3 py-2 cursor-pointer' href='https://ai-keting.ru' target="_blank" rel='noreferrer'>
+                     <Icon type="question" color={'#888'} size={14} /> Помощь
                   </a>
                </li>
                <li className='block lg:inline-block lg:ml-5'>
                   <a className='block px-3 py-2 cursor-pointer' onClick={() => logoutUser()}>
-                     <Icon type="logout" color={'#888'} size={14} /> Logout
+                     <Icon type="logout" color={'#888'} size={14} /> Выход
                   </a>
                </li>
             </ul>

@@ -49,7 +49,7 @@ const DiscoverPage: NextPage = () => {
       <div className="Domain ">
          {activDomain && activDomain.domain
          && <Head>
-               <title>{`${activDomain.domain} - Keyword Ideas` } </title>
+               <title>{`${activDomain.domain} — Идеи ключевиков` } </title>
             </Head>
          }
          <TopBar showSettings={() => setShowSettings(true)} showAddModal={() => setShowAddDomain(true)} />
@@ -95,7 +95,7 @@ const DiscoverPage: NextPage = () => {
          </CSSTransition>
 
          {showUpdateModal && activDomain?.domain && (
-            <Modal closeModal={() => setShowUpdateModal(false) } title={'Load Keyword Ideas from Google Ads'} verticalCenter={true}>
+            <Modal closeModal={() => setShowUpdateModal(false) } title={'Загрузить идеи ключевиков из Google Ads'} verticalCenter={true}>
                <KeywordIdeasUpdater
                domain={activDomain}
                onUpdate={() => setShowUpdateModal(false)}

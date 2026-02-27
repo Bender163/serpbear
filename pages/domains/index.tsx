@@ -78,24 +78,24 @@ const Domains: NextPage = () => {
       <div data-testid="domains" className="Domain flex flex-col min-h-screen">
          {((!scraper_type || (scraper_type === 'none')) && !isAppSettingsLoading) && (
                <div className=' p-3 bg-red-600 text-white text-sm text-center'>
-                  A Scrapper/Proxy has not been set up Yet. Open Settings to set it up and start using the app.
+                  Скрапер/прокси не настроен. Откройте Настройки для настройки.
                </div>
          )}
          {migrationStatus?.hasMigrations && (
                <div className=' p-3 bg-black text-white text-sm text-center'>
-                  You need to Update your database. Stop Serpbear and run this command to update your database:
+                  Необходимо обновить базу данных. Остановите сервис и выполните команду:
                   <code className=' bg-gray-700 px-2 py-0 ml-1'>npm run db:migrate</code>
                </div>
          )}
          <Head>
-            <title>Domains - SerpBear</title>
+            <title>Домены — SERP Трекер</title>
          </Head>
          <TopBar showSettings={() => setShowSettings(true)} showAddModal={() => setShowAddDomain(true)} />
 
          <div className="flex flex-col w-full max-w-5xl mx-auto p-6 lg:mt-24 lg:p-0">
             <div className='flex justify-between mb-2 items-center'>
                <div className=' text-sm text-gray-600'>
-                  {domainsData?.domains?.length || 0} Domains <span className=' text-gray-300 ml-1 mr-1'>|</span> {totalKeywords} keywords
+                  {domainsData?.domains?.length || 0} доменов <span className=' text-gray-300 ml-1 mr-1'>|</span> {totalKeywords} ключевиков
                </div>
                <div>
                   <button
@@ -104,7 +104,7 @@ const Domains: NextPage = () => {
                   onClick={() => setShowAddDomain(true)}>
                      <span
                      className='text-center leading-4 mr-2 inline-block rounded-full w-7 h-7 pt-1 bg-blue-700 text-white font-bold text-lg'>+</span>
-                     <i className=' not-italic hidden lg:inline-block'>Add Domain</i>
+                     <i className=' not-italic hidden lg:inline-block'>Добавить домен</i>
                   </button>
                </div>
             </div>
@@ -122,12 +122,12 @@ const Domains: NextPage = () => {
                })}
                {isLoading && (
                   <div className='noDomains mt-4 p-5 py-12 rounded border text-center bg-white text-sm'>
-                     <Icon type="loading" /> Loading Domains...
+                     <Icon type="loading" /> Загрузка доменов...
                   </div>
                )}
                {!isLoading && domainsData && domainsData.domains && domainsData.domains.length === 0 && (
                   <div className='noDomains mt-4 p-5 py-12 rounded border text-center bg-white text-sm'>
-                     No Domains Found. Add a Domain to get started!
+                     Домены не найдены. Добавьте домен, чтобы начать!
                   </div>
                )}
             </div>

@@ -63,12 +63,12 @@ const KeywordsTable = (props: KeywordsTableProps) => {
    const { mutate: updateMutate, isLoading: isUpdatingSettings } = useUpdateSettings(() => console.log(''));
 
    const scDataObject:{ [k:string] : string} = {
-      threeDays: 'Last Three Days',
-      sevenDays: 'Last Seven Days',
-      thirtyDays: 'Last Thirty Days',
-      avgThreeDays: 'Last Three Days Avg',
-      avgSevenDays: 'Last Seven Days Avg',
-      avgThirtyDays: 'Last Thirty Days Avg',
+      threeDays: '3 дня',
+      sevenDays: '7 дней',
+      thirtyDays: '30 дней',
+      avgThreeDays: 'Средн. 3 дня',
+      avgSevenDays: 'Средн. 7 дней',
+      avgThirtyDays: 'Средн. 30 дней',
    };
 
    const processedKeywords: {[key:string] : KeywordType[]} = useMemo(() => {
@@ -138,7 +138,7 @@ const KeywordsTable = (props: KeywordsTableProps) => {
                         className='block px-2 py-2 cursor-pointer hover:text-indigo-600'
                         onClick={() => { refreshMutate({ ids: selectedKeywords }); setSelectedKeywords([]); }}
                         >
-                           <span className=' bg-indigo-100 text-blue-700 px-1 rounded'><Icon type="reload" size={11} /></span> Refresh Keywords
+                           <span className=' bg-indigo-100 text-blue-700 px-1 rounded'><Icon type="reload" size={11} /></span> Обновить
                         </a>
                      </li>
                      <li className='inline-block mr-4'>
@@ -146,14 +146,14 @@ const KeywordsTable = (props: KeywordsTableProps) => {
                         className='block px-2 py-2 cursor-pointer hover:text-indigo-600'
                         onClick={() => setShowRemoveModal(true)}
                         >
-                           <span className=' bg-red-100 text-red-600 px-1 rounded'><Icon type="trash" size={14} /></span> Remove Keywords</a>
+                           <span className=' bg-red-100 text-red-600 px-1 rounded'><Icon type="trash" size={14} /></span> Удалить</a>
                      </li>
                      <li className='inline-block mr-4'>
                         <a
                         className='block px-2 py-2 cursor-pointer hover:text-indigo-600'
                         onClick={() => setShowAddTags(true)}
                         >
-                           <span className=' bg-green-100 text-green-500  px-1 rounded'><Icon type="tags" size={14} /></span> Tag Keywords</a>
+                           <span className=' bg-green-100 text-green-500  px-1 rounded'><Icon type="tags" size={14} /></span> Теги</a>
                      </li>
                   </ul>
                </div>
@@ -193,15 +193,15 @@ const KeywordsTable = (props: KeywordsTableProps) => {
                   {/* ${showSCData ? 'lg:min-w-[220px]' : 'lg:min-w-[280px]'} */}
                         <span className={`inline-block lg:flex lg:items-center 
                            ${showSCData && tableColumns.includes('Search Console') ? 'lg:max-w-[235px]' : ''}`}>
-                           Keyword
+                           Ключевик
                         </span>
                      </span>
-                     <span className='domKeywords_head_position flex-1 basis-24 grow-0 text-center'>Position</span>
-                     <span className={`domKeywords_head_best flex-1 basis-16 grow-0 text-center  ${shouldHideColumn('Best')}`}>Best</span>
-                     <span className={`domKeywords_head_history flex-1 basis-20 grow-0  ${shouldHideColumn('History')}`}>History (7d)</span>
-                     <span className={`domKeywords_head_volume flex-1 basis-24 grow-0 text-center ${shouldHideColumn('Volume')}`}>Volume</span>
+                     <span className='domKeywords_head_position flex-1 basis-24 grow-0 text-center'>Позиция</span>
+                     <span className={`domKeywords_head_best flex-1 basis-16 grow-0 text-center  ${shouldHideColumn('Best')}`}>Лучшая</span>
+                     <span className={`domKeywords_head_history flex-1 basis-20 grow-0  ${shouldHideColumn('History')}`}>История (7д)</span>
+                     <span className={`domKeywords_head_volume flex-1 basis-24 grow-0 text-center ${shouldHideColumn('Volume')}`}>Частотность</span>
                      <span className='domKeywords_head_url flex-1'>URL</span>
-                     <span className='domKeywords_head_updated flex-1 relative left-3 max-w-[150px]'>Updated</span>
+                     <span className='domKeywords_head_updated flex-1 relative left-3 max-w-[150px]'>Обновлено</span>
                      {showSCData && tableColumns.includes('Search Console') && (
                         <div className='domKeywords_head_sc flex-1 min-w-[170px] lg:max-w-[170px] mr-7 text-center'>
                            {/* Search Console */}
@@ -251,10 +251,10 @@ const KeywordsTable = (props: KeywordsTableProps) => {
                         </List>
                      )}
                      {!isLoading && processedKeywords[device].length === 0 && (
-                        <p className=' p-9 pt-[10%] text-center text-gray-500'>No Keywords Added for this Device Type.</p>
+                        <p className=' p-9 pt-[10%] text-center text-gray-500'>Нет ключевиков для этого устройства.</p>
                      )}
                      {isLoading && (
-                        <p className=' p-9 pt-[10%] text-center text-gray-500'>Loading Keywords...</p>
+                        <p className=' p-9 pt-[10%] text-center text-gray-500'>Загрузка ключевиков...</p>
                      )}
                   </div>
                </div>
@@ -264,19 +264,19 @@ const KeywordsTable = (props: KeywordsTableProps) => {
             <KeywordDetails keyword={showKeyDetails} closeDetails={() => setShowKeyDetails(null)} />
          )}
          {showRemoveModal && selectedKeywords.length > 0 && (
-            <Modal closeModal={() => { setSelectedKeywords([]); setShowRemoveModal(false); }} title={'Remove Keywords'}>
+            <Modal closeModal={() => { setSelectedKeywords([]); setShowRemoveModal(false); }} title={'Удалить ключевики'}>
                   <div className='text-sm'>
-                     <p>Are you sure you want to remove {selectedKeywords.length > 1 ? 'these' : 'this'} Keyword?</p>
+                     <p>Вы уверены, что хотите удалить {selectedKeywords.length > 1 ? 'эти' : 'этот'} ключевик(и)?</p>
                      <div className='mt-6 text-right font-semibold'>
                         <button
                         className=' py-1 px-5 rounded cursor-pointer bg-indigo-50 text-slate-500 mr-3'
                         onClick={() => { setSelectedKeywords([]); setShowRemoveModal(false); }}>
-                           Cancel
+                           Отмена
                         </button>
                         <button
                         className=' py-1 px-5 rounded cursor-pointer bg-red-400 text-white'
                         onClick={() => { deleteMutate(selectedKeywords); setShowRemoveModal(false); setSelectedKeywords([]); }}>
-                           Remove
+                           Удалить
                         </button>
                      </div>
                   </div>

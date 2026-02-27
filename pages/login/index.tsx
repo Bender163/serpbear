@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Icon from '../../components/common/Icon';
 
 type LoginError = {
@@ -15,17 +15,28 @@ const Login: NextPage = () => {
    const [password, setPassword] = useState<string>('');
    const router = useRouter();
 
+   // Auto-redirect if already authenticated (e.g. via mos_token cookie)
+   useEffect(() => {
+      fetch(`${window.location.origin}/api/domains`, { credentials: 'include' })
+         .then((res) => {
+            if (res.ok) {
+               router.push('/domains');
+            }
+         })
+         .catch(() => { /* Not authenticated, stay on login page */ });
+   }, [router]);
+
    const loginuser = async () => {
       let loginError: LoginError |null = null;
       if (!username || !password) {
          if (!username && !password) {
-            loginError = { type: 'empty_username_password', msg: 'Please Insert Your App Username & Password to login.' };
+            loginError = { type: 'empty_username_password', msg: 'Введите логин и пароль для входа.' };
          }
          if (!username && password) {
-            loginError = { type: 'empty_username', msg: 'Please Insert Your App Username' };
+            loginError = { type: 'empty_username', msg: 'Введите логин' };
          }
          if (!password && username) {
-            loginError = { type: 'empty_password', msg: 'Please Insert Your App Password' };
+            loginError = { type: 'empty_password', msg: 'Введите пароль' };
          }
          setError(loginError);
          setTimeout(() => { setError(null); }, 3000);
@@ -50,7 +61,7 @@ const Login: NextPage = () => {
                router.push('/');
             }
          } catch (fetchError) {
-            setError({ type: 'unknown', msg: 'Could not login, Ther Server is not responsive.' });
+            setError({ type: 'unknown', msg: 'Не удалось войти. Сервер не отвечает.' });
             setTimeout(() => { setError(null); }, 3000);
          }
       }
@@ -63,18 +74,17 @@ const Login: NextPage = () => {
    return (
       <div className={'Login'}>
          <Head>
-            <title>Login - SerpBear</title>
+            <title>Вход — SERP Трекер</title>
          </Head>
          <div className='flex items-center justify-center w-full h-screen'>
             <div className='w-80 mt-[-300px]'>
                <h3 className="py-7 text-2xl font-bold text-blue-700 text-center">
                   <span className=' relative top-[3px] mr-1'>
-                     <Icon type="logo" size={30} color="#364AFF" />
-                  </span> SerpBear
+                  </span> 📊 SERP Трекер
                </h3>
                <div className='relative bg-[white] rounded-md text-sm border p-5'>
                   <div className="settings__section__input mb-5">
-                     <label className={labelStyle}>Username</label>
+                     <label className={labelStyle}>Логин</label>
                      <input
                         className={`
                            ${inputStyle} 
@@ -86,7 +96,7 @@ const Login: NextPage = () => {
                      />
                   </div>
                   <div className="settings__section__input mb-5">
-                     <label className={labelStyle}>Password</label>
+                     <label className={labelStyle}>Пароль</label>
                      <input
                         className={`
                            ${inputStyle} 
@@ -100,7 +110,7 @@ const Login: NextPage = () => {
                   <button
                   onClick={() => loginuser()}
                   className={'py-3 px-5 w-full rounded cursor-pointer bg-blue-700 text-white font-semibold text-sm'}>
-                     Login
+                     Войти
                   </button>
                   {error && error.msg
                   && <div

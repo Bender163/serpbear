@@ -27,7 +27,7 @@ const DomainItem = ({ domain, selected, isConsoleIntegrated = false, thumb, upda
                   <button
                      className=' absolute right-1 top-0 text-gray-400 p-1 transition-all
                      invisible opacity-0 group-hover:visible group-hover:opacity-100 hover:text-gray-600 z-10'
-                     title='Reload Website Screenshot'
+                     title='Обновить скриншот сайта'
                      onClick={(e) => { e.preventDefault(); e.stopPropagation(); updateThumb(domain.domain); }}
                   >
                      <Icon type="reload" size={12} />
@@ -48,14 +48,14 @@ const DomainItem = ({ domain, selected, isConsoleIntegrated = false, thumb, upda
             </div>
             <div className='flex-1 flex flex-col p-4'>
                <div className=' bg-indigo-50 p-1 px-2 text-xs rounded-full absolute ml-3 mt-[-8px]'>
-                  <Icon type="tracking" size={13} color="#364aff" /> Tracker
+                  <Icon type="tracking" size={13} color="#364aff" /> Трекинг
                </div>
                <div className='dom_stats flex flex-1 font-semibold text-2xl p-4 pt-5 rounded border border-[#E9EBFF] text-center'>
                   <div className="flex-1 relative">
-                     <span className='block text-xs lg:text-sm text-gray-500 mb-1'>Keywords</span>{keywordCount}
+                     <span className='block text-xs lg:text-sm text-gray-500 mb-1'>Ключевики</span>{keywordCount}
                   </div>
                   <div className="flex-1 relative">
-                     <span className='block text-xs lg:text-sm text-gray-500 mb-1'>Avg position</span>{avgPosition}
+                     <span className='block text-xs lg:text-sm text-gray-500 mb-1'>Средняя позиция</span>{avgPosition}
                   </div>
                </div>
             </div>
@@ -66,15 +66,15 @@ const DomainItem = ({ domain, selected, isConsoleIntegrated = false, thumb, upda
                   </div>
                   <div className='dom_sc_stats flex flex-1 h-full font-semibold text-2xl p-4 pt-5 rounded border border-[#E9EBFF] text-center'>
                      <div className="flex-1 relative">
-                        <span className='block text-xs lg:text-sm text-gray-500 mb-1'>Visits</span>
+                        <span className='block text-xs lg:text-sm text-gray-500 mb-1'>Визиты</span>
                         {new Intl.NumberFormat('en-US', { notation: 'compact', compactDisplay: 'short' }).format(scVisits).replace('T', 'K')}
                      </div>
                      <div className="flex-1 relative">
-                        <span className='block text-xs lg:text-sm text-gray-500 mb-1'>Impressions</span>
+                        <span className='block text-xs lg:text-sm text-gray-500 mb-1'>Показы</span>
                         {new Intl.NumberFormat('en-US', { notation: 'compact', compactDisplay: 'short' }).format(scImpressions).replace('T', 'K')}
                      </div>
                      <div className="flex-1 relative">
-                        <span className='block text-xs lg:text-sm text-gray-500 mb-1'>Avg position</span>
+                        <span className='block text-xs lg:text-sm text-gray-500 mb-1'>Средняя позиция</span>
                         {scPosition}
                      </div>
                   </div>

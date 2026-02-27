@@ -210,21 +210,21 @@ const Keyword = (props: KeywordProps) => {
                <ul className='keyword_options customShadow absolute w-[180px] right-0 bg-white rounded border z-20'>
                   <li>
                      <a className={optionsButtonStyle} onClick={() => { refreshkeyword([ID]); setShowOptions(false); }}>
-                     <span className=' bg-indigo-100 text-blue-700 px-1 rounded'><Icon type="reload" size={11} /></span> Refresh Keyword</a>
+                     <span className=' bg-indigo-100 text-blue-700 px-1 rounded'><Icon type="reload" size={11} /></span> Обновить</a>
                   </li>
                   <li>
                      <a className={optionsButtonStyle}
                      onClick={() => { favoriteKeyword({ keywordID: ID, sticky: !sticky }); setShowOptions(false); }}>
                         <span className=' bg-yellow-300/30 text-yellow-500 px-1 rounded'>
                            <Icon type="star" size={14} />
-                        </span> { sticky ? 'Unfavorite Keyword' : 'Favorite Keyword'}
+                        </span> { sticky ? 'Убрать из избранного' : 'В избранное'}
                      </a>
                   </li>
                   <li><a className={optionsButtonStyle} onClick={() => { manageTags(); setShowOptions(false); }}>
-                     <span className=' bg-green-100 text-green-500 px-1 rounded'><Icon type="tags" size={14} /></span> Add/Edit Tags</a>
+                     <span className=' bg-green-100 text-green-500 px-1 rounded'><Icon type="tags" size={14} /></span> Теги</a>
                   </li>
                   <li><a className={optionsButtonStyle} onClick={() => { removeKeyword([ID]); setShowOptions(false); }}>
-                     <span className=' bg-red-100 text-red-600 px-1 rounded'><Icon type="trash" size={14} /></span> Remove Keyword</a>
+                     <span className=' bg-red-100 text-red-600 px-1 rounded'><Icon type="trash" size={14} /></span> Удалить</a>
                   </li>
                </ul>
             )}
@@ -233,7 +233,7 @@ const Keyword = (props: KeywordProps) => {
          {lastUpdateError && lastUpdateError.date && showPositionError && (
             <div className={`absolute p-2 bg-white z-30 border border-red-200 rounded w-[220px] left-4 shadow-sm text-xs 
             ${index > 2 ? 'lg:bottom-12 mt-[-70px]' : ' top-12'}`}>
-               Error Updating Keyword position (Tried <TimeAgo
+               Ошибка обновления позиции (попытка <TimeAgo
                                                          title={dayjs(lastUpdateError.date).format('DD-MMM-YYYY, hh:mm:ss A')}
                                                          date={lastUpdateError.date} />)
                <i className='absolute top-0 right-0 ml-2 p-2 font-semibold not-italic cursor-pointer' onClick={() => setPositionError(false)}>

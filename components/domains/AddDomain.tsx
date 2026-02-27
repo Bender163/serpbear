@@ -36,7 +36,7 @@ const AddDomain = ({ closeModal, domains = [] }: AddDomainProps) => {
         }
       });
       if (invalidDomains.length > 0) {
-         setNewDomainError(`Please Insert Valid Website URL. ${invalidDomains.length > 1 ? `Invalid URLs: ${invalidDomains.join(', ')}` : ''}`);
+         setNewDomainError(`Введите корректный URL сайта. ${invalidDomains.length > 1 ? `Некорректные URL: ${invalidDomains.join(', ')}` : ''}`);
       } else if (domainsTobeAdded.length > 0) {
             console.log('domainsTobeAdded :', domainsTobeAdded);
          addMutate(domainsTobeAdded);
@@ -49,22 +49,22 @@ const AddDomain = ({ closeModal, domains = [] }: AddDomainProps) => {
    };
 
    return (
-      <Modal closeModal={() => { closeModal(false); }} title={'Add New Domain'}>
+      <Modal closeModal={() => { closeModal(false); }} title={'Добавить домен'}>
          <div data-testid="adddomain_modal">
-            <h4 className='text-sm mt-4 pb-2'>Website URL(s)</h4>
+            <h4 className='text-sm mt-4 pb-2'>URL сайтов</h4>
             <textarea
                className={`w-full h-40 border rounded border-gray-200 p-4 outline-none
                 focus:border-indigo-300 ${newDomainError ? ' border-red-400 focus:border-red-400' : ''}`}
-               placeholder={'Type or Paste URLs here. Insert Each URL in a New line. eg: \nhttps://mysite.com/ \nhttps://anothersite.com/ '}
+               placeholder={'Введите или вставьте URL. Каждый URL на новой строке. Например: \nhttps://mysite.com/ \nhttps://anothersite.com/ '}
                value={newDomain}
                autoFocus={true}
                onChange={handleDomainInput}>
             </textarea>
             {newDomainError && <div><span className=' ml-2 block float-right text-red-500 text-xs font-semibold'>{newDomainError}</span></div>}
             <div className='mt-6 text-right text-sm font-semibold'>
-               <button className='py-2 px-5 rounded cursor-pointer bg-indigo-50 text-slate-500 mr-3' onClick={() => closeModal(false)}>Cancel</button>
+               <button className='py-2 px-5 rounded cursor-pointer bg-indigo-50 text-slate-500 mr-3' onClick={() => closeModal(false)}>Отмена</button>
                <button className='py-2 px-5 rounded cursor-pointer bg-blue-700 text-white' onClick={() => !isAdding && addDomain() }>
-                   {isAdding ? 'Adding....' : 'Add Domain'}
+                   {isAdding ? 'Добавление...' : 'Добавить домен'}
                </button>
             </div>
          </div>

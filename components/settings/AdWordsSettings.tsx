@@ -58,7 +58,7 @@ const AdWordsSettings = ({ settings, settingsError, updateSettings, performUpdat
       <div>
       <div>
          <div className=' border-t border-gray-100 pt-4 pb-0'>
-            <h4 className=' mb-3 font-semibold text-blue-700'>Step 1: Connect Google Cloud Project</h4>
+            <h4 className=' mb-3 font-semibold text-blue-700'>Шаг 1: Подключение Google Cloud Project</h4>
             <div className="settings__section__input mb-4 flex justify-between items-center w-full">
                <SecretField
                label='Client ID'
@@ -79,18 +79,18 @@ const AdWordsSettings = ({ settings, settingsError, updateSettings, performUpdat
             className={`py-2 px-5 w-full text-sm font-semibold rounded  bg-indigo-50 text-blue-700 border border-indigo-100
             ${adwords_client_id && adwords_client_secret ? 'cursor-pointer' : ' cursor-not-allowed opacity-40'}
              hover:bg-blue-700 hover:text-white transition`}
-            title='Insert All the data in the above fields to Authenticate'
+            title='Заполните все поля выше для аутентификации'
             onClick={udpateAndAuthenticate}>
-               <Icon type='google' size={14} /> {adwords_refresh_token ? 'Re-Authenticate' : 'Authenticate'} Integration
+               <Icon type='google' size={14} /> {adwords_refresh_token ? 'Переавторизовать' : 'Авторизовать'} интеграцию
             </button>
          </div>
          <div className='mt-4 border-t mb-4 border-b border-gray-100 pt-4 pb-0 relative'>
             {!cloudProjectIntegrated && <div className=' absolute w-full h-full z-50' />}
-            <h4 className=' mb-3 font-semibold text-blue-700'>Step 2: Connect Google Ads</h4>
+            <h4 className=' mb-3 font-semibold text-blue-700'>Шаг 2: Подключение Google Ads</h4>
             <div className={!cloudProjectIntegrated ? 'opacity-40' : ''}>
                <div className="settings__section__input mb-4 flex justify-between items-center w-full">
                   <SecretField
-                  label='Developer Token'
+                  label='Токен разработчика'
                   onChange={(developer_token:string) => updateSettings('adwords_developer_token', developer_token)}
                   value={adwords_developer_token}
                   placeholder='4xr6jY94kAxtXk4rfcgc4w'
@@ -98,7 +98,7 @@ const AdWordsSettings = ({ settings, settingsError, updateSettings, performUpdat
                </div>
                <div className="settings__section__input mb-4 flex justify-between items-center w-full">
                   <SecretField
-                  label='Test Account ID'
+                  label='ID тестового аккаунта'
                   onChange={(account_id:string) => updateSettings('adwords_account_id', account_id)}
                   value={adwords_account_id}
                   placeholder='590-948-9101'
@@ -109,20 +109,20 @@ const AdWordsSettings = ({ settings, settingsError, updateSettings, performUpdat
                   className={`py-2 px-5 w-full text-sm font-semibold rounded bg-indigo-50 text-blue-700 border border-indigo-100
                   ${hasAllCredentials ? 'cursor-pointer' : 'cursor-not-allowed opacity-40'}
                   hover:bg-blue-700 hover:text-white transition`}
-                  title={hasAllCredentials ? '' : 'Insert All the data in the above fields to Test the Integration'}
+                  title={hasAllCredentials ? '' : 'Заполните все поля выше для тестирования интеграции'}
                   onClick={testIntegration}>
                      {isTesting && <Icon type='loading' />}
-                     <Icon type='adwords' size={14} /> Test Google Ads Integration
+                     <Icon type='adwords' size={14} /> Тестировать интеграцию Google Ads
                   </button>
                </div>
             </div>
          </div>
          <div className='mt-4 mb-4 border-b border-gray-100 pt-4 pb-0 relative'>
             {!hasAllCredentials && <div className=' absolute w-full h-full z-50' />}
-            <h4 className=' mb-3 font-semibold text-blue-700'>Update Keyword Volume Data</h4>
+            <h4 className=' mb-3 font-semibold text-blue-700'>Обновить данные частотности</h4>
             <div className={!hasAllCredentials ? 'opacity-40' : ''}>
                <div className="settings__section__input mb-4 flex justify-between items-center w-full">
-                  <p>Update Volume data for all your Tracked Keywords.</p>
+                  <p>Обновить данные частотности для всех отслеживаемых ключевиков.</p>
                </div>
                <div className="settings__section__input mb-4 flex justify-between items-center w-full">
                   <button
@@ -130,13 +130,13 @@ const AdWordsSettings = ({ settings, settingsError, updateSettings, performUpdat
                   ${hasAllCredentials ? 'cursor-pointer' : 'cursor-not-allowed opacity-40'}
                   hover:bg-blue-700 hover:text-white transition`}
                   onClick={updateVolumeData}>
-                     <Icon type={isUpdatingVolume ? 'loading' : 'reload'} size={isUpdatingVolume ? 16 : 12} /> Update Keywords Volume Data
+                     <Icon type={isUpdatingVolume ? 'loading' : 'reload'} size={isUpdatingVolume ? 16 : 12} /> Обновить частотность ключевиков
                   </button>
                </div>
             </div>
          </div>
          <p className='mb-4 text-xs'>
-            Relevant Documentation: <a target='_blank' rel='noreferrer' href='https://docs.serpbear.com/miscellaneous/integrate-google-ads' className=' underline text-blue-600'>Integrate Google Ads</a>.
+            Документация: <a target='_blank' rel='noreferrer' href='https://docs.serpbear.com/miscellaneous/integrate-google-ads' className=' underline text-blue-600'>Интеграция Google Ads</a>.
          </p>
       </div>
    </div>

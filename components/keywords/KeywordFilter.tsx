@@ -96,14 +96,14 @@ const KeywordFilters = (props: KeywordFilterProps) => {
    }, [SCcountries, isConsole, keywords]);
 
    const sortOptionChoices: SelectionOption[] = [
-      { value: 'pos_asc', label: 'Top Position' },
-      { value: 'pos_desc', label: 'Lowest Position' },
-      { value: 'date_asc', label: 'Most Recent (Default)' },
-      { value: 'date_desc', label: 'Oldest' },
-      { value: 'alpha_asc', label: 'Alphabetically(A-Z)' },
-      { value: 'alpha_desc', label: 'Alphabetically(Z-A)' },
-      { value: 'vol_asc', label: 'Lowest Search Volume' },
-      { value: 'vol_desc', label: 'Highest Search Volume' },
+      { value: 'pos_asc', label: 'Лучшая позиция' },
+      { value: 'pos_desc', label: 'Худшая позиция' },
+      { value: 'date_asc', label: 'Недавние (по умолчанию)' },
+      { value: 'date_desc', label: 'Старые' },
+      { value: 'alpha_asc', label: 'По алфавиту (А-Я)' },
+      { value: 'alpha_desc', label: 'По алфавиту (Я-А)' },
+      { value: 'vol_asc', label: 'Наименьшая частотность' },
+      { value: 'vol_desc', label: 'Наибольшая частотность' },
    ];
 
    const columnOptionChoices: {label: string, value: string, locked: boolean}[] = [
@@ -117,15 +117,15 @@ const KeywordFilters = (props: KeywordFilterProps) => {
       { value: 'Search Console', label: 'Search Console', locked: false },
    ];
    if (integratedConsole) {
-      sortOptionChoices.push({ value: 'imp_desc', label: `Most Viewed${isConsole ? ' (Default)' : ''}` });
-      sortOptionChoices.push({ value: 'imp_asc', label: 'Least Viewed' });
-      sortOptionChoices.push({ value: 'visits_desc', label: 'Most Visited' });
-      sortOptionChoices.push({ value: 'visits_asc', label: 'Least Visited' });
+      sortOptionChoices.push({ value: 'imp_desc', label: `Больше показов${isConsole ? ' (по умолчанию)' : ''}` });
+      sortOptionChoices.push({ value: 'imp_asc', label: 'Меньше показов' });
+      sortOptionChoices.push({ value: 'visits_desc', label: 'Больше визитов' });
+      sortOptionChoices.push({ value: 'visits_asc', label: 'Меньше визитов' });
    }
    if (isConsole) {
       sortOptionChoices.splice(2, 2);
-      sortOptionChoices.push({ value: 'ctr_asc', label: 'Highest CTR' });
-      sortOptionChoices.push({ value: 'ctr_desc', label: 'Lowest CTR' });
+      sortOptionChoices.push({ value: 'ctr_asc', label: 'Наибольший CTR' });
+      sortOptionChoices.push({ value: 'ctr_desc', label: 'Наименьший CTR' });
    }
    const sortItemStyle = (sortType:string) => {
       return `cursor-pointer py-2 px-3 hover:bg-[#FCFCFF] ${sortBy === sortType ? 'bg-indigo-50 text-indigo-600 hover:bg-indigo-50' : ''}`;
@@ -171,7 +171,7 @@ const KeywordFilters = (props: KeywordFilterProps) => {
                   <SelectField
                      selected={filterParams.countries}
                      options={countryOptions}
-                     defaultLabel='All Countries'
+                     defaultLabel='Все страны'
                      updateField={(updated:string[]) => filterCountry(updated)}
                      flags={true}
                   />
@@ -181,7 +181,7 @@ const KeywordFilters = (props: KeywordFilterProps) => {
                      <SelectField
                         selected={filterParams.engines}
                         options={engineOptions}
-                        defaultLabel='All Engines'
+                        defaultLabel='Все движки'
                         updateField={(updated:string[]) => filterEngines(updated)}
                      />
                   </div>
@@ -191,9 +191,9 @@ const KeywordFilters = (props: KeywordFilterProps) => {
                      <SelectField
                         selected={filterParams.tags}
                         options={allTags.map((tag:string) => ({ label: tag, value: tag }))}
-                        defaultLabel='All Tags'
+                        defaultLabel='Все теги'
                         updateField={(updated:string[]) => filterTags(updated)}
-                        emptyMsg="No Tags Found for this Domain"
+                        emptyMsg="Теги не найдены для этого домена"
                      />
                   </div>
                )}
@@ -202,7 +202,7 @@ const KeywordFilters = (props: KeywordFilterProps) => {
                      data-testid="filter_input"
                      className={'border w-44 lg:w-36 focus:w-44 transition-all rounded-3xl p-1.5 px-4 outline-none ring-0 focus:border-indigo-200'}
                      type="text"
-                     placeholder='Filter Keywords...'
+                     placeholder='Фильтр ключевиков...'
                      onChange={searchKeywords}
                      value={filterParams.search}
                   />
@@ -255,7 +255,7 @@ const KeywordFilters = (props: KeywordFilterProps) => {
                                     >
                                        <span className={' inline-block px-[3px] border border-gray-200  rounded-[4px] w-5'}>
                                           <Icon
-                                          title={locked ? 'Cannot be Hidden' : ''}
+                                          title={locked ? 'Нельзя скрыть' : ''}
                                           type={locked ? 'lock' : 'check'}
                                           color={!tableColumns.includes(value) && !locked ? 'transparent' : '#999' }
                                           size={12}
