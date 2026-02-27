@@ -229,6 +229,7 @@ const IdeasKeywordsTable = ({
                      )}
                      {!isAdwordsIntegrated && (
                         <p className=' p-9 pt-[10%] text-center text-gray-500'>
+{/* eslint-disable-next-line max-len */}
                            Google Ads не интегрирован. Следуйте <a className='text-indigo-600 underline' href='https://docs.serpbear.com/miscellaneous/integrate-google-ads' target="_blank" rel='noreferrer'>инструкции</a> для интеграции Google Ads.
                         </p>
                      )}

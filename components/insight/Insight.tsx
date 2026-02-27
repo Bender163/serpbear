@@ -117,6 +117,7 @@ const SCInsight = ({ insight, isLoading = true, isConsoleIntegrated = true, doma
                      )}
                      {!isConsoleIntegrated && (
                         <p className=' p-9 pt-[10%] text-center text-gray-500'>
+{/* eslint-disable-next-line max-len */}
                         Google Search Console не интегрирован. Следуйте <a className='text-indigo-600 underline' href='https://docs.serpbear.com/miscellaneous/integrate-google-search-console' target="_blank" rel='noreferrer'>инструкции</a> для интеграции данных Google Search для этого домена.
                         </p>
                      )}

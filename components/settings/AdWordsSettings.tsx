@@ -136,6 +136,7 @@ const AdWordsSettings = ({ settings, settingsError, updateSettings, performUpdat
             </div>
          </div>
          <p className='mb-4 text-xs'>
+{/* eslint-disable-next-line max-len */}
             Документация: <a target='_blank' rel='noreferrer' href='https://docs.serpbear.com/miscellaneous/integrate-google-ads' className=' underline text-blue-600'>Интеграция Google Ads</a>.
          </p>
       </div>

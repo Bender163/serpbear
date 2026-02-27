@@ -62,7 +62,8 @@ const DomainHeader = (
                <Link href={`/domain/console/${domain.slug}`} passHref={true}>
                   <a className='px-4 py-2 inline-block'><Icon type="google" size={13} classes='hidden lg:inline-block' />
                      <span className='text-xs lg:text-sm lg:ml-2'>Обнаружение</span>
-                     <Icon type='help' size={14} color="#aaa" classes="ml-2 hidden lg:inline-block" title='Ключевики, по которым вы уже ранжируетесь' />
+                     <Icon type='help' size={14} color="#aaa" classes="ml-2 hidden lg:inline-block"
+                        title='Ключевики, по которым вы уже ранжируетесь' />
                   </a>
                </Link>
             </li>
