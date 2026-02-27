@@ -107,13 +107,13 @@ const KeywordFilters = (props: KeywordFilterProps) => {
    ];
 
    const columnOptionChoices: {label: string, value: string, locked: boolean}[] = [
-      { value: 'Keyword', label: 'Keyword', locked: true },
-      { value: 'Position', label: 'Position', locked: true },
+      { value: 'Keyword', label: 'Ключевик', locked: true },
+      { value: 'Position', label: 'Позиция', locked: true },
       { value: 'URL', label: 'URL', locked: true },
-      { value: 'Updated', label: 'Updated', locked: true },
-      { value: 'Best', label: 'Best', locked: false },
-      { value: 'History', label: 'History', locked: false },
-      { value: 'Volume', label: 'Volume', locked: false },
+      { value: 'Updated', label: 'Обновлено', locked: true },
+      { value: 'Best', label: 'Лучшая', locked: false },
+      { value: 'History', label: 'История', locked: false },
+      { value: 'Volume', label: 'Частотность', locked: false },
       { value: 'Search Console', label: 'Search Console', locked: false },
    ];
    if (integratedConsole) {
@@ -161,7 +161,7 @@ const KeywordFilters = (props: KeywordFilterProps) => {
                <button
                data-testid="filter_button"
                className={`px-2 py-1 rounded ${filterOptions ? ' bg-indigo-100 text-blue-700' : ''}`}
-               title='Filter'
+               title='Фильтр'
                onClick={() => showFilterOptions(!filterOptions)}>
                   <Icon type="filter" size={18} />
                </button>
@@ -212,7 +212,7 @@ const KeywordFilters = (props: KeywordFilterProps) => {
                   <button
                   data-testid="sort_button"
                   className={`px-2 py-1 rounded ${sortOptions ? ' bg-indigo-100 text-blue-700' : ''}`}
-                  title='Sort'
+                  title='Сортировка'
                   onClick={() => showSortOptions(!sortOptions)}>
                      <Icon type="sort" size={18} />
                   </button>
@@ -237,7 +237,7 @@ const KeywordFilters = (props: KeywordFilterProps) => {
                   <button
                   data-testid="columns_button"
                   className={`px-2 py-1 rounded ${columnOptions ? ' bg-indigo-100 text-blue-700' : ''}`}
-                  title='Show/Hide Columns'
+                  title='Показать/скрыть колонки'
                   onClick={() => showColumnOptions(!columnOptions)}
                   >
                      <Icon type='eye-closed' size={18} />

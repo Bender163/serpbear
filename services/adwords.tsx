@@ -14,14 +14,14 @@ export function useTestAdwordsIntegration(onSuccess?: Function) {
    }, {
       onSuccess: async (data) => {
          console.log('Ideas Added:', data);
-         toast('Google Ads has been integrated successfully!', { icon: '✔️' });
+         toast('Google Ads успешно интегрирован!', { icon: '✔️' });
          if (onSuccess) {
             onSuccess(false);
          }
       },
       onError: (error) => {
          console.log('Error Loading Keyword Ideas!!!', error);
-         toast('Failed to connect to Google Ads. Please make sure you have provided the correct API info.', { icon: '⚠️' });
+         toast('Не удалось подключиться к Google Ads. Проверьте правильность API данных.', { icon: '⚠️' });
       },
    });
 }
@@ -60,7 +60,7 @@ export function useMutateKeywordIdeas(router:NextRouter, onSuccess?: Function) {
    }, {
       onSuccess: async (data) => {
          console.log('Ideas Added:', data);
-         toast('Keyword Ideas Loaded Successfully!', { icon: '✔️' });
+         toast('Идеи ключевиков загружены!', { icon: '✔️' });
          if (onSuccess) {
             onSuccess(false);
          }
@@ -68,7 +68,7 @@ export function useMutateKeywordIdeas(router:NextRouter, onSuccess?: Function) {
       },
       onError: (error) => {
          console.log('Error Loading Keyword Ideas!!!', error);
-         toast('Error Loading Keyword Ideas', { icon: '⚠️' });
+         toast('Ошибка загрузки идей ключевиков', { icon: '⚠️' });
       },
    });
 }
@@ -95,7 +95,7 @@ export function useMutateFavKeywordIdeas(router:NextRouter, onSuccess?: Function
       },
       onError: (error) => {
          console.log('Error Favorating Keywords', error);
-         toast('Error Favorating Keywords', { icon: '⚠️' });
+         toast('Ошибка изменения избранного', { icon: '⚠️' });
       },
    });
 }
@@ -112,7 +112,7 @@ export function useMutateKeywordsVolume(onSuccess?: Function) {
       return res.json();
    }, {
       onSuccess: async (data) => {
-         toast('Keyword Volume Data Loaded Successfully! Reloading Page...', { icon: '✔️' });
+         toast('Данные частотности загружены! Перезагрузка страницы...', { icon: '✔️' });
          if (onSuccess) {
             onSuccess(false);
          }
@@ -122,7 +122,7 @@ export function useMutateKeywordsVolume(onSuccess?: Function) {
       },
       onError: (error) => {
          console.log('Error Loading Keyword Volume Data!!!', error);
-         toast('Error Loading Keyword Volume Data', { icon: '⚠️' });
+         toast('Ошибка загрузки данных частотности', { icon: '⚠️' });
       },
    });
 }

@@ -41,7 +41,7 @@ const DomainItem = ({ domain, selected, isConsoleIntegrated = false, thumb, upda
                   <h3 className='font-semibold text-base mb-2 max-w-[200px] text-ellipsis overflow-hidden' title={domain.domain}>{domain.domain}</h3>
                  {keywordsUpdated && (
                   <span className=' text-gray-600 text-xs'>
-                     Updated <TimeAgo title={dayjs(keywordsUpdated).format('DD-MMM-YYYY, hh:mm:ss A')} date={keywordsUpdated} />
+                     Обновлено <TimeAgo title={dayjs(keywordsUpdated).format('DD-MMM-YYYY, hh:mm:ss A')} date={keywordsUpdated} />
                   </span>
                  )}
                </div>

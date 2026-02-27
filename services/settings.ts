@@ -28,12 +28,12 @@ export const useUpdateSettings = (onSuccess:Function|undefined) => {
          if (onSuccess) {
             onSuccess();
          }
-         toast('Settings Updated!', { icon: '✔️' });
+         toast('Настройки обновлены!', { icon: '✔️' });
          queryClient.invalidateQueries(['settings']);
       },
       onError: () => {
          console.log('Error Updating App Settings!!!');
-         toast('Error Updating App Settings.', { icon: '⚠️' });
+         toast('Ошибка обновления настроек.', { icon: '⚠️' });
       },
    });
 };
@@ -51,12 +51,12 @@ export function useClearFailedQueue(onSuccess:Function) {
    }, {
       onSuccess: async () => {
          onSuccess();
-         toast('Failed Queue Cleared', { icon: '✔️' });
+         toast('Очередь ошибок очищена', { icon: '✔️' });
          queryClient.invalidateQueries(['settings']);
       },
       onError: () => {
          console.log('Error Clearing Failed Queue!!!');
-         toast('Error Clearing Failed Queue.', { icon: '⚠️' });
+         toast('Ошибка очистки очереди.', { icon: '⚠️' });
       },
    });
 }
@@ -85,12 +85,12 @@ export const useMigrateDatabase = (onSuccess:Function|undefined) => {
          if (onSuccess) {
             onSuccess(res);
          }
-         toast('Database Updated!', { icon: '✔️' });
+         toast('База данных обновлена!', { icon: '✔️' });
          queryClient.invalidateQueries(['settings']);
       },
       onError: () => {
          console.log('Error Updating Database!!!');
-         toast('Error Updating Database.', { icon: '⚠️' });
+         toast('Ошибка обновления базы данных.', { icon: '⚠️' });
       },
    });
 };

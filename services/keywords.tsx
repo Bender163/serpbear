@@ -28,7 +28,7 @@ export function useFetchKeywords(
                   setKeywordSPollInterval(5000);
                } else {
                   if (keywordSPollInterval) {
-                     toast('Keywords Refreshed!', { icon: '✔️' });
+                     toast('Ключевики обновлены!', { icon: '✔️' });
                   }
                   setKeywordSPollInterval(undefined);
                }
@@ -52,13 +52,13 @@ export function useAddKeywords(onSuccess:Function) {
    }, {
       onSuccess: async () => {
          console.log('Keywords Added!!!');
-         toast('Keywords Added Successfully!', { icon: '✔️' });
+         toast('Ключевики добавлены!', { icon: '✔️' });
          onSuccess();
          queryClient.invalidateQueries(['keywords']);
       },
       onError: () => {
          console.log('Error Adding New Keywords!!!');
-         toast('Error Adding New Keywords', { icon: '⚠️' });
+         toast('Ошибка добавления ключевиков', { icon: '⚠️' });
       },
    });
 }
@@ -76,12 +76,12 @@ export function useDeleteKeywords(onSuccess:Function) {
       onSuccess: async () => {
          console.log('Removed Keyword!!!');
          onSuccess();
-         toast('Keywords Removed Successfully!', { icon: '✔️' });
+         toast('Ключевики удалены!', { icon: '✔️' });
          queryClient.invalidateQueries(['keywords']);
       },
       onError: () => {
          console.log('Error Removing Keyword!!!');
-         toast('Error Removing the Keywords', { icon: '⚠️' });
+         toast('Ошибка удаления ключевиков', { icon: '⚠️' });
       },
    });
 }
@@ -100,12 +100,12 @@ export function useFavKeywords(onSuccess:Function) {
       onSuccess: async (data) => {
          onSuccess();
          const isSticky = data.keywords[0] && data.keywords[0].sticky;
-         toast(isSticky ? 'Keywords Made Favorite!' : 'Keywords Unfavorited!', { icon: '✔️' });
+         toast(isSticky ? 'Добавлено в избранное!' : 'Убрано из избранного!', { icon: '✔️' });
          queryClient.invalidateQueries(['keywords']);
       },
       onError: () => {
          console.log('Error Changing Favorite Status!!!');
-         toast('Error Changing Favorite Status.', { icon: '⚠️' });
+         toast('Ошибка изменения статуса избранного.', { icon: '⚠️' });
       },
    });
 }
@@ -124,12 +124,12 @@ export function useUpdateKeywordTags(onSuccess:Function) {
    }, {
       onSuccess: async () => {
          onSuccess();
-         toast('Keyword Tags Updated!', { icon: '✔️' });
+         toast('Теги обновлены!', { icon: '✔️' });
          queryClient.invalidateQueries(['keywords']);
       },
       onError: () => {
          console.log('Error Updating Keyword Tags!!!');
-         toast('Error Updating Keyword Tags.', { icon: '⚠️' });
+         toast('Ошибка обновления тегов.', { icon: '⚠️' });
       },
    });
 }
@@ -149,12 +149,12 @@ export function useRefreshKeywords(onSuccess:Function) {
       onSuccess: async () => {
          console.log('Keywords Added to Refresh Queue!!!');
          onSuccess();
-         toast('Keywords Added to Refresh Queue', { icon: '🔄' });
+         toast('Ключевики добавлены в очередь обновления', { icon: '🔄' });
          queryClient.invalidateQueries(['keywords']);
       },
       onError: () => {
          console.log('Error Refreshing Keywords!!!');
-         toast('Error Refreshing Keywords.', { icon: '⚠️' });
+         toast('Ошибка обновления ключевиков.', { icon: '⚠️' });
       },
    });
 }
@@ -174,7 +174,7 @@ export function useFetchSingleKeyword(keywordID:number) {
    }, {
       onError: () => {
          console.log('Error Loading Keyword Data!!!');
-         toast('Error Loading Keyword Details.', { icon: '⚠️' });
+         toast('Ошибка загрузки данных ключевика.', { icon: '⚠️' });
       },
    });
 }

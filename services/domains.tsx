@@ -90,7 +90,7 @@ export function useAddDomain(onSuccess:Function) {
          console.log('Domain Added!!!', data);
          const newDomain:DomainType[] = data.domains;
          const singleDomain = newDomain.length === 1;
-         toast(`${singleDomain ? newDomain[0].domain : `${newDomain.length} domains`} Added Successfully!`, { icon: '✔️' });
+         toast(`${singleDomain ? newDomain[0].domain : `${newDomain.length} доменов`} добавлено!`, { icon: '✔️' });
          onSuccess(false);
          if (singleDomain) {
             router.push(`/domain/${newDomain[0].slug}`);
@@ -99,7 +99,7 @@ export function useAddDomain(onSuccess:Function) {
       },
       onError: () => {
          console.log('Error Adding New Domain!!!');
-         toast('Error Adding New Domain');
+         toast('Ошибка добавления домена');
       },
    });
 }
@@ -118,13 +118,13 @@ export function useUpdateDomain(onSuccess:Function) {
    }, {
       onSuccess: async () => {
          console.log('Settings Updated!!!');
-         toast('Settings Updated!', { icon: '✔️' });
+         toast('Настройки обновлены!', { icon: '✔️' });
          onSuccess();
          queryClient.invalidateQueries(['domains']);
       },
       onError: (error) => {
          console.log('Error Updating Domain Settings!!!', error);
-         toast('Error Updating Domain Settings', { icon: '⚠️' });
+         toast('Ошибка обновления настроек домена', { icon: '⚠️' });
       },
    });
 }
@@ -139,13 +139,13 @@ export function useDeleteDomain(onSuccess:Function) {
       return res.json();
    }, {
       onSuccess: async () => {
-         toast('Domain Removed Successfully!', { icon: '✔️' });
+         toast('Домен удалён!', { icon: '✔️' });
          onSuccess();
          queryClient.invalidateQueries(['domains']);
       },
       onError: () => {
          console.log('Error Removing Domain!!!');
-         toast('Error Removing Domain', { icon: '⚠️' });
+         toast('Ошибка удаления домена', { icon: '⚠️' });
       },
    });
 }

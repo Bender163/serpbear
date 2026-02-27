@@ -97,7 +97,7 @@ const DomainSettings = ({ domain, closeModal }: DomainSettingsProps) => {
                         <div className="mb-4 flex justify-between items-center w-full">
                            <label className='mb-2 font-semibold inline-block text-sm text-gray-700 capitalize'>Тип ресурса</label>
                            <SelectField
-                           options={[{ label: 'Domain', value: 'domain' }, { label: 'URL', value: 'url' }]}
+                           options={[{ label: 'Домен', value: 'domain' }, { label: 'URL', value: 'url' }]}
                            selected={[domainSettings.search_console?.property_type || 'domain']}
                            defaultLabel="Выберите тип ресурса"
                            updateField={(updated:['domain'|'url']) => setDomainSettings({
